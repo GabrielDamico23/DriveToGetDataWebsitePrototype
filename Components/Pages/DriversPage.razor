@@ -1,0 +1,37 @@
+﻿@*This page will display a list of all current F1 Drivers as a table*@
+
+@page "/drivers"
+@using DriveToGetDataWebsitePrototype.Data
+@using DriveToGetDataWebsitePrototype.Models
+@inject ApplicationDbContext DbContext
+
+<h3>DriversPage</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Driver ID</th>
+            <th>Given Name</th>
+            <th>Family Name</th>
+            <th>Permanent Number</th>
+            <th>Nationality</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var driver in drivers)
+        {
+            <tr>
+                <td>@driver.F1DriverId</td>
+                <td>@driver.GivenName</td>
+                <td>@driver.FamilyName</td>
+                <td>@driver.PermanentNumber</td>
+                <td>@driver.Nationality</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private IQueryable<F1Driver> drivers=> DbContext.Drivers;
+}
+

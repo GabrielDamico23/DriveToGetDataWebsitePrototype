@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DriveToGetDataWebsitePrototype.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240925192027_AddDrivers")]
-    partial class AddDrivers
+    [Migration("20241001160246_AddData")]
+    partial class AddData
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,9 +90,288 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("DriveToGetDataWebsitePrototype.Models.Driver", b =>
+            modelBuilder.Entity("DriveToGetDataWebsitePrototype.Models.Circuit", b =>
                 {
-                    b.Property<string>("DriverId")
+                    b.Property<string>("CircuitId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CircuitName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Locality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CircuitId");
+
+                    b.ToTable("Circuits", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CircuitId = "albert_park",
+                            CircuitName = "Albert Park Grand Prix Circuit",
+                            Country = "Australia",
+                            Locality = "Melbourne"
+                        },
+                        new
+                        {
+                            CircuitId = "americas",
+                            CircuitName = "Circuit of the Americas",
+                            Country = "USA",
+                            Locality = "Austin"
+                        },
+                        new
+                        {
+                            CircuitId = "bahrain",
+                            CircuitName = "Bahrain International Circuit",
+                            Country = "Bahrain",
+                            Locality = "Sakhir"
+                        },
+                        new
+                        {
+                            CircuitId = "baku",
+                            CircuitName = "Baku City Circuit",
+                            Country = "Azerbaijan",
+                            Locality = "Baku"
+                        },
+                        new
+                        {
+                            CircuitId = "catalunya",
+                            CircuitName = "Circuit de Barcelona-Catalunya",
+                            Country = "Spain",
+                            Locality = "Montmelo"
+                        },
+                        new
+                        {
+                            CircuitId = "hungaroring",
+                            CircuitName = "Hungaroring",
+                            Country = "Hungary",
+                            Locality = "Budapest"
+                        },
+                        new
+                        {
+                            CircuitId = "imola",
+                            CircuitName = "Autodromo Enzo e Dino Ferrari",
+                            Country = "Italy",
+                            Locality = "Imola"
+                        },
+                        new
+                        {
+                            CircuitId = "interlagos",
+                            CircuitName = "Autodromo Jose Carlos Pace",
+                            Country = "Brazil",
+                            Locality = "Sao Paulo"
+                        },
+                        new
+                        {
+                            CircuitId = "jeddah",
+                            CircuitName = "Jeddah Corniche Circuit",
+                            Country = "Saudi Arabia",
+                            Locality = "Jeddah"
+                        },
+                        new
+                        {
+                            CircuitId = "losail",
+                            CircuitName = "Losail International Circuit",
+                            Country = "Qatar",
+                            Locality = "Al Daayen"
+                        },
+                        new
+                        {
+                            CircuitId = "marina_bay",
+                            CircuitName = "Marina Bay Street Circuit",
+                            Country = "Singapore",
+                            Locality = "Marina Bay"
+                        },
+                        new
+                        {
+                            CircuitId = "miami",
+                            CircuitName = "Miami International Autodrome",
+                            Country = "USA",
+                            Locality = "Miami"
+                        },
+                        new
+                        {
+                            CircuitId = "monaco",
+                            CircuitName = "Circuit de Monaco",
+                            Country = "Monaco",
+                            Locality = "Monte Carlo"
+                        },
+                        new
+                        {
+                            CircuitId = "monza",
+                            CircuitName = "Autodromo Nazionale di Monza",
+                            Country = "Italy",
+                            Locality = "Monza"
+                        },
+                        new
+                        {
+                            CircuitId = "red_bull_ring",
+                            CircuitName = "Red Bull Ring",
+                            Country = "Austria",
+                            Locality = "Spielberg"
+                        },
+                        new
+                        {
+                            CircuitId = "ricard",
+                            CircuitName = "Circuit Paul Ricard",
+                            Country = "France",
+                            Locality = "Le Castellet"
+                        },
+                        new
+                        {
+                            CircuitId = "rodriguez",
+                            CircuitName = "Autodromo Hermanos Rodriguez",
+                            Country = "Mexico",
+                            Locality = "Mexico City"
+                        },
+                        new
+                        {
+                            CircuitId = "shanghai",
+                            CircuitName = "Shanghai International Circuit",
+                            Country = "China",
+                            Locality = "Shanghai"
+                        },
+                        new
+                        {
+                            CircuitId = "silverstone",
+                            CircuitName = "Silverstone Circuit",
+                            Country = "UK",
+                            Locality = "Silverstone"
+                        },
+                        new
+                        {
+                            CircuitId = "spa",
+                            CircuitName = "Circuit de Spa-Francorchamps",
+                            Country = "Belgium",
+                            Locality = "Spa"
+                        },
+                        new
+                        {
+                            CircuitId = "suzuka",
+                            CircuitName = "Suzuka Circuit",
+                            Country = "Japan",
+                            Locality = "Suzuka"
+                        },
+                        new
+                        {
+                            CircuitId = "vegas",
+                            CircuitName = "Las Vegas Strip Street Circuit",
+                            Country = "USA",
+                            Locality = "Las Vegas"
+                        },
+                        new
+                        {
+                            CircuitId = "villeneuve",
+                            CircuitName = "Circuit Gilles Villeneuve",
+                            Country = "Canada",
+                            Locality = "Montreal"
+                        },
+                        new
+                        {
+                            CircuitId = "yas_marina",
+                            CircuitName = "Yas Marina Circuit",
+                            Country = "UAE",
+                            Locality = "Abu Dhabi"
+                        },
+                        new
+                        {
+                            CircuitId = "zandvoort",
+                            CircuitName = "Circuit Zandvoort",
+                            Country = "Netherlands",
+                            Locality = "Zandvoort"
+                        });
+                });
+
+            modelBuilder.Entity("DriveToGetDataWebsitePrototype.Models.Constructor", b =>
+                {
+                    b.Property<string>("ConstructorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConstructorName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nationality")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ConstructorId");
+
+                    b.ToTable("Constructors", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ConstructorId = "alpine",
+                            ConstructorName = "Alpine F1 Team",
+                            Nationality = "French"
+                        },
+                        new
+                        {
+                            ConstructorId = "astone_martin",
+                            ConstructorName = "Aston Martin",
+                            Nationality = "British"
+                        },
+                        new
+                        {
+                            ConstructorId = "ferrari",
+                            ConstructorName = "Ferrari",
+                            Nationality = "Italian"
+                        },
+                        new
+                        {
+                            ConstructorId = "haas",
+                            ConstructorName = "Haas F1 Team",
+                            Nationality = "American"
+                        },
+                        new
+                        {
+                            ConstructorId = "mclaren",
+                            ConstructorName = "McLaren",
+                            Nationality = "British"
+                        },
+                        new
+                        {
+                            ConstructorId = "mercedes",
+                            ConstructorName = "Mercedes",
+                            Nationality = "German"
+                        },
+                        new
+                        {
+                            ConstructorId = "rb",
+                            ConstructorName = "RB F1 Team",
+                            Nationality = "Italian"
+                        },
+                        new
+                        {
+                            ConstructorId = "red_bull",
+                            ConstructorName = "Red Bull",
+                            Nationality = "Austrian"
+                        },
+                        new
+                        {
+                            ConstructorId = "sauber",
+                            ConstructorName = "Sauber",
+                            Nationality = "Swiss"
+                        },
+                        new
+                        {
+                            ConstructorId = "williams",
+                            ConstructorName = "Williams",
+                            Nationality = "British"
+                        });
+                });
+
+            modelBuilder.Entity("DriveToGetDataWebsitePrototype.Models.F1Driver", b =>
+                {
+                    b.Property<string>("F1DriverId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FamilyName")
@@ -110,14 +389,14 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                     b.Property<int>("PermanentNumber")
                         .HasColumnType("int");
 
-                    b.HasKey("DriverId");
+                    b.HasKey("F1DriverId");
 
-                    b.ToTable("Driver", (string)null);
+                    b.ToTable("Drivers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            DriverId = "hamilton",
+                            F1DriverId = "hamilton",
                             FamilyName = "Hamilton",
                             GivenName = "Lewis",
                             Nationality = "British",
@@ -125,7 +404,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "bottas",
+                            F1DriverId = "bottas",
                             FamilyName = "Bottas",
                             GivenName = "Valtteri",
                             Nationality = "Finnish",
@@ -133,7 +412,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "verstappen",
+                            F1DriverId = "verstappen",
                             FamilyName = "Verstappen",
                             GivenName = "Max",
                             Nationality = "Dutch",
@@ -141,7 +420,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "perez",
+                            F1DriverId = "perez",
                             FamilyName = "Perez",
                             GivenName = "Sergio",
                             Nationality = "Mexican",
@@ -149,7 +428,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "norris",
+                            F1DriverId = "norris",
                             FamilyName = "Norris",
                             GivenName = "Lando",
                             Nationality = "British",
@@ -157,7 +436,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "ricciardo",
+                            F1DriverId = "ricciardo",
                             FamilyName = "Ricciardo",
                             GivenName = "Daniel",
                             Nationality = "Australian",
@@ -165,7 +444,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "sainz",
+                            F1DriverId = "sainz",
                             FamilyName = "Sainz",
                             GivenName = "Carlos",
                             Nationality = "Spanish",
@@ -173,7 +452,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "leclerc",
+                            F1DriverId = "leclerc",
                             FamilyName = "Leclerc",
                             GivenName = "Charles",
                             Nationality = "Monegasque",
@@ -181,7 +460,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "piastri",
+                            F1DriverId = "piastri",
                             FamilyName = "Piastri",
                             GivenName = "Oscar",
                             Nationality = "Australian",
@@ -189,7 +468,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "russell",
+                            F1DriverId = "russell",
                             FamilyName = "Russell",
                             GivenName = "George",
                             Nationality = "British",
@@ -197,7 +476,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "alonso",
+                            F1DriverId = "alonso",
                             FamilyName = "Alonso",
                             GivenName = "Fernando",
                             Nationality = "Spanish",
@@ -205,7 +484,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "ocon",
+                            F1DriverId = "ocon",
                             FamilyName = "Ocon",
                             GivenName = "Esteban",
                             Nationality = "French",
@@ -213,7 +492,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "hulkenberg",
+                            F1DriverId = "hulkenberg",
                             FamilyName = "Hulkenberg",
                             GivenName = "Nico",
                             Nationality = "German",
@@ -221,7 +500,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "stroll",
+                            F1DriverId = "stroll",
                             FamilyName = "Stroll",
                             GivenName = "Lance",
                             Nationality = "Canadian",
@@ -229,7 +508,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "tsunoda",
+                            F1DriverId = "tsunoda",
                             FamilyName = "Tsunoda",
                             GivenName = "Yuki",
                             Nationality = "Japanese",
@@ -237,7 +516,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "gasly",
+                            F1DriverId = "gasly",
                             FamilyName = "Gasly",
                             GivenName = "Pierre",
                             Nationality = "French",
@@ -245,7 +524,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "bearman",
+                            F1DriverId = "bearman",
                             FamilyName = "Bearman",
                             GivenName = "Oliver",
                             Nationality = "British",
@@ -253,7 +532,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "magnussen",
+                            F1DriverId = "magnussen",
                             FamilyName = "Magnussen",
                             GivenName = "Kevin",
                             Nationality = "Danish",
@@ -261,7 +540,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "colapinto",
+                            F1DriverId = "colapinto",
                             FamilyName = "Colapinto",
                             GivenName = "Franco",
                             Nationality = "Argentinian",
@@ -269,7 +548,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "schumacher",
+                            F1DriverId = "schumacher",
                             FamilyName = "Schumacher",
                             GivenName = "Mick",
                             Nationality = "German",
@@ -277,7 +556,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "vettel",
+                            F1DriverId = "vettel",
                             FamilyName = "Vettel",
                             GivenName = "Sebastian",
                             Nationality = "German",
@@ -285,7 +564,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "latifi",
+                            F1DriverId = "latifi",
                             FamilyName = "Latifi",
                             GivenName = "Nicholas",
                             Nationality = "Canadian",
@@ -293,7 +572,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "Guanyu",
+                            F1DriverId = "Guanyu",
                             FamilyName = "Zhou",
                             GivenName = "Zhou",
                             Nationality = "Chinese",
@@ -301,7 +580,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "sargeant",
+                            F1DriverId = "sargeant",
                             FamilyName = "Sargeant",
                             GivenName = "Logan",
                             Nationality = "American",
@@ -309,7 +588,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "albon",
+                            F1DriverId = "albon",
                             FamilyName = "Albon",
                             GivenName = "Alexander",
                             Nationality = "Thai",
@@ -317,7 +596,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "deVries",
+                            F1DriverId = "deVries",
                             FamilyName = "de Vries",
                             GivenName = "Nyck",
                             Nationality = "Dutch",
@@ -325,7 +604,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         },
                         new
                         {
-                            DriverId = "lawson",
+                            F1DriverId = "lawson",
                             FamilyName = "Lawson",
                             GivenName = "Liam",
                             Nationality = "New Zealander",

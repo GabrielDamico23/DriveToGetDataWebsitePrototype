@@ -106,7 +106,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
 
                     b.HasKey("CircuitId");
 
-                    b.ToTable("Circuit", (string)null);
+                    b.ToTable("Circuits", (string)null);
 
                     b.HasData(
                         new
@@ -301,7 +301,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
 
                     b.HasKey("ConstructorId");
 
-                    b.ToTable("Constructor", (string)null);
+                    b.ToTable("Constructors", (string)null);
 
                     b.HasData(
                         new
@@ -366,9 +366,9 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         });
                 });
 
-            modelBuilder.Entity("DriveToGetDataWebsitePrototype.Models.Driver", b =>
+            modelBuilder.Entity("DriveToGetDataWebsitePrototype.Models.F1Driver", b =>
                 {
-                    b.Property<string>("DriverId")
+                    b.Property<string>("F1DriverId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("FamilyName")
@@ -379,6 +379,9 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nationality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -386,224 +389,251 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                     b.Property<int>("PermanentNumber")
                         .HasColumnType("int");
 
-                    b.HasKey("DriverId");
+                    b.HasKey("F1DriverId");
 
-                    b.ToTable("Driver", (string)null);
+                    b.ToTable("Drivers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            DriverId = "hamilton",
+                            F1DriverId = "hamilton",
                             FamilyName = "Hamilton",
                             GivenName = "Lewis",
+                            Image = "",
                             Nationality = "British",
                             PermanentNumber = 44
                         },
                         new
                         {
-                            DriverId = "bottas",
+                            F1DriverId = "bottas",
                             FamilyName = "Bottas",
                             GivenName = "Valtteri",
+                            Image = "",
                             Nationality = "Finnish",
                             PermanentNumber = 77
                         },
                         new
                         {
-                            DriverId = "verstappen",
+                            F1DriverId = "verstappen",
                             FamilyName = "Verstappen",
                             GivenName = "Max",
+                            Image = "",
                             Nationality = "Dutch",
                             PermanentNumber = 1
                         },
                         new
                         {
-                            DriverId = "perez",
+                            F1DriverId = "perez",
                             FamilyName = "Perez",
                             GivenName = "Sergio",
+                            Image = "",
                             Nationality = "Mexican",
                             PermanentNumber = 11
                         },
                         new
                         {
-                            DriverId = "norris",
+                            F1DriverId = "norris",
                             FamilyName = "Norris",
                             GivenName = "Lando",
+                            Image = "",
                             Nationality = "British",
                             PermanentNumber = 4
                         },
                         new
                         {
-                            DriverId = "ricciardo",
+                            F1DriverId = "ricciardo",
                             FamilyName = "Ricciardo",
                             GivenName = "Daniel",
+                            Image = "",
                             Nationality = "Australian",
                             PermanentNumber = 3
                         },
                         new
                         {
-                            DriverId = "sainz",
+                            F1DriverId = "sainz",
                             FamilyName = "Sainz",
                             GivenName = "Carlos",
+                            Image = "",
                             Nationality = "Spanish",
                             PermanentNumber = 55
                         },
                         new
                         {
-                            DriverId = "leclerc",
+                            F1DriverId = "leclerc",
                             FamilyName = "Leclerc",
                             GivenName = "Charles",
+                            Image = "",
                             Nationality = "Monegasque",
                             PermanentNumber = 16
                         },
                         new
                         {
-                            DriverId = "piastri",
+                            F1DriverId = "piastri",
                             FamilyName = "Piastri",
                             GivenName = "Oscar",
+                            Image = "",
                             Nationality = "Australian",
                             PermanentNumber = 81
                         },
                         new
                         {
-                            DriverId = "russell",
+                            F1DriverId = "russell",
                             FamilyName = "Russell",
                             GivenName = "George",
+                            Image = "",
                             Nationality = "British",
                             PermanentNumber = 63
                         },
                         new
                         {
-                            DriverId = "alonso",
+                            F1DriverId = "alonso",
                             FamilyName = "Alonso",
                             GivenName = "Fernando",
+                            Image = "",
                             Nationality = "Spanish",
                             PermanentNumber = 14
                         },
                         new
                         {
-                            DriverId = "ocon",
+                            F1DriverId = "ocon",
                             FamilyName = "Ocon",
                             GivenName = "Esteban",
+                            Image = "",
                             Nationality = "French",
                             PermanentNumber = 31
                         },
                         new
                         {
-                            DriverId = "hulkenberg",
+                            F1DriverId = "hulkenberg",
                             FamilyName = "Hulkenberg",
                             GivenName = "Nico",
+                            Image = "",
                             Nationality = "German",
                             PermanentNumber = 27
                         },
                         new
                         {
-                            DriverId = "stroll",
+                            F1DriverId = "stroll",
                             FamilyName = "Stroll",
                             GivenName = "Lance",
+                            Image = "",
                             Nationality = "Canadian",
                             PermanentNumber = 18
                         },
                         new
                         {
-                            DriverId = "tsunoda",
+                            F1DriverId = "tsunoda",
                             FamilyName = "Tsunoda",
                             GivenName = "Yuki",
+                            Image = "",
                             Nationality = "Japanese",
                             PermanentNumber = 22
                         },
                         new
                         {
-                            DriverId = "gasly",
+                            F1DriverId = "gasly",
                             FamilyName = "Gasly",
                             GivenName = "Pierre",
+                            Image = "",
                             Nationality = "French",
                             PermanentNumber = 10
                         },
                         new
                         {
-                            DriverId = "bearman",
+                            F1DriverId = "bearman",
                             FamilyName = "Bearman",
                             GivenName = "Oliver",
+                            Image = "",
                             Nationality = "British",
                             PermanentNumber = 50
                         },
                         new
                         {
-                            DriverId = "magnussen",
+                            F1DriverId = "magnussen",
                             FamilyName = "Magnussen",
                             GivenName = "Kevin",
+                            Image = "",
                             Nationality = "Danish",
                             PermanentNumber = 20
                         },
                         new
                         {
-                            DriverId = "colapinto",
+                            F1DriverId = "colapinto",
                             FamilyName = "Colapinto",
                             GivenName = "Franco",
+                            Image = "",
                             Nationality = "Argentinian",
                             PermanentNumber = 43
                         },
                         new
                         {
-                            DriverId = "schumacher",
+                            F1DriverId = "schumacher",
                             FamilyName = "Schumacher",
                             GivenName = "Mick",
+                            Image = "",
                             Nationality = "German",
                             PermanentNumber = 47
                         },
                         new
                         {
-                            DriverId = "vettel",
+                            F1DriverId = "vettel",
                             FamilyName = "Vettel",
                             GivenName = "Sebastian",
+                            Image = "",
                             Nationality = "German",
                             PermanentNumber = 5
                         },
                         new
                         {
-                            DriverId = "latifi",
+                            F1DriverId = "latifi",
                             FamilyName = "Latifi",
                             GivenName = "Nicholas",
+                            Image = "",
                             Nationality = "Canadian",
                             PermanentNumber = 6
                         },
                         new
                         {
-                            DriverId = "Guanyu",
+                            F1DriverId = "Guanyu",
                             FamilyName = "Zhou",
                             GivenName = "Zhou",
+                            Image = "",
                             Nationality = "Chinese",
                             PermanentNumber = 24
                         },
                         new
                         {
-                            DriverId = "sargeant",
+                            F1DriverId = "sargeant",
                             FamilyName = "Sargeant",
                             GivenName = "Logan",
+                            Image = "",
                             Nationality = "American",
                             PermanentNumber = 2
                         },
                         new
                         {
-                            DriverId = "albon",
+                            F1DriverId = "albon",
                             FamilyName = "Albon",
                             GivenName = "Alexander",
+                            Image = "",
                             Nationality = "Thai",
                             PermanentNumber = 23
                         },
                         new
                         {
-                            DriverId = "deVries",
+                            F1DriverId = "deVries",
                             FamilyName = "de Vries",
                             GivenName = "Nyck",
+                            Image = "",
                             Nationality = "Dutch",
                             PermanentNumber = 7
                         },
                         new
                         {
-                            DriverId = "lawson",
+                            F1DriverId = "lawson",
                             FamilyName = "Lawson",
                             GivenName = "Liam",
+                            Image = "",
                             Nationality = "New Zealander",
                             PermanentNumber = 36
                         });

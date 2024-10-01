@@ -8,15 +8,14 @@ namespace DriveToGetDataWebsitePrototype.Data
     {
         public DbSet<F1Driver> Drivers { get; set; }
         public DbSet<Constructor> Constructors { get; set; }
-
         public DbSet<Circuit> Circuits { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<F1Driver>().ToTable("Driver");
-            modelBuilder.Entity<Constructor>().ToTable("Constructor");
-            modelBuilder.Entity<Circuit>().ToTable("Circuit");
+            modelBuilder.Entity<F1Driver>().ToTable("Drivers");
+            modelBuilder.Entity<Constructor>().ToTable("Constructors");
+            modelBuilder.Entity<Circuit>().ToTable("Circuits");
 
             modelBuilder.Entity<F1Driver>().HasData(
                 new F1Driver { F1DriverId = "hamilton", GivenName = "Lewis", FamilyName = "Hamilton", PermanentNumber = 44, Nationality = "British" },
@@ -62,7 +61,7 @@ namespace DriveToGetDataWebsitePrototype.Data
             );
 
             modelBuilder.Entity<Circuit>().HasData(
-                new Circuit { CircuitId = "albert_park", CircuitName = "Albert Park Grand Prix Circuit",  Locality = "Melbourne", Country = "Australia"},
+                new Circuit { CircuitId = "albert_park", CircuitName = "Albert Park Grand Prix Circuit", Locality = "Melbourne", Country = "Australia" },
                 new Circuit { CircuitId = "americas", CircuitName = "Circuit of the Americas", Locality = "Austin", Country = "USA" },
                 new Circuit { CircuitId = "bahrain", CircuitName = "Bahrain International Circuit", Locality = "Sakhir", Country = "Bahrain" },
                 new Circuit { CircuitId = "baku", CircuitName = "Baku City Circuit", Locality = "Baku", Country = "Azerbaijan" },
@@ -71,7 +70,7 @@ namespace DriveToGetDataWebsitePrototype.Data
                 new Circuit { CircuitId = "imola", CircuitName = "Autodromo Enzo e Dino Ferrari", Locality = "Imola", Country = "Italy" },
                 new Circuit { CircuitId = "interlagos", CircuitName = "Autodromo Jose Carlos Pace", Locality = "Sao Paulo", Country = "Brazil" },
                 new Circuit { CircuitId = "jeddah", CircuitName = "Jeddah Corniche Circuit", Locality = "Jeddah", Country = "Saudi Arabia" },
-                new Circuit { CircuitId = "losail", CircuitName = "Losail International Circuit", Locality = "Al Daayen", Country = "Qatar"},
+                new Circuit { CircuitId = "losail", CircuitName = "Losail International Circuit", Locality = "Al Daayen", Country = "Qatar" },
                 new Circuit { CircuitId = "marina_bay", CircuitName = "Marina Bay Street Circuit", Locality = "Marina Bay", Country = "Singapore" },
                 new Circuit { CircuitId = "miami", CircuitName = "Miami International Autodrome", Locality = "Miami", Country = "USA" },
                 new Circuit { CircuitId = "monaco", CircuitName = "Circuit de Monaco", Locality = "Monte Carlo", Country = "Monaco" },
