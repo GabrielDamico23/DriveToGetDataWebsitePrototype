@@ -1,9 +1,9 @@
 ﻿namespace DriveToGetDataWebsitePrototype.Models
 {
-    public class Driver
+    public class F1Driver
     {
 
-        public string DriverId { get; set; } = string.Empty;
+        public string F1DriverId { get; set; } = string.Empty;
         public string GivenName { get; set; } = string.Empty;
         public string FamilyName { get; set; } = string.Empty;
         public int PermanentNumber { get; set; } 

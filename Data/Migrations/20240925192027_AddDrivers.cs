@@ -16,7 +16,7 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                 name: "Driver",
                 columns: table => new
                 {
-                    DriverId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    F1DriverId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GivenName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FamilyName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PermanentNumber = table.Column<int>(type: "int", nullable: false),
@@ -24,12 +24,12 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Driver", x => x.DriverId);
+                    table.PrimaryKey("PK_Driver", x => x.F1DriverId);
                 });
 
             migrationBuilder.InsertData(
                 table: "Driver",
-                columns: new[] { "DriverId", "FamilyName", "GivenName", "Nationality", "PermanentNumber" },
+                columns: new[] { "F1DriverId", "FamilyName", "GivenName", "Nationality", "PermanentNumber" },
                 values: new object[,]
                 {
                     { "albon", "Albon", "Alexander", "Thai", 23 },
