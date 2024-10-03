@@ -1,0 +1,44 @@
+﻿@page "/ergastconstructors"
+
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using DriveToGetDataWebsitePrototype.Services;
+@using DriveToGetDataWebsitePrototype.Models;
+
+@inject ErgastF1Service ConstructorService
+
+@rendermode InteractiveServer
+
+<PageTitle>Constructors</PageTitle>
+
+<h3>Ergast F1 Constructors Table</h3>
+
+@if (f1constructors == null) //if data is loading slowly
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid class="table" Items="f1constructors" Pagination="@pagination">
+        <PropertyColumn Property="@(d => d.Name)" Title="Driver ID" />
+        <PropertyColumn Property="@(d => d.Nationality)" Title="Nationality" />
+    </QuickGrid>
+
+    <Paginator State="@pagination" />
+}
+
+@code
+{
+    private IQueryable<ErgastConstructor> f1constructors;
+
+    PaginationState pagination = new PaginationState { ItemsPerPage = 20 };
+
+    private string filterText = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        List<ErgastConstructor> ergastConstructors = await ConstructorService.GetErgastConstructorsAsync();
+        //List<ErgastDriver> driversList = ergastDrivers;
+        f1constructors = ergastConstructors.AsQueryable();
+    }
+
+}

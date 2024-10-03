@@ -18,8 +18,7 @@
 }
 else
 {
-    <QuickGrid class="table" Items="f1drivers" Pagination="@pagination">
-        <PropertyColumn Property="@(d => d.Code)" Title="Code" />
+    <QuickGrid class="table" Items="f1drivers" Pagination="@pagination">        
         <PropertyColumn Property="@(d => d.DriverId)" Title="Driver ID" />
         <PropertyColumn Property="@(d => d.FamilyName)" Title="Family Name" Sortable="true">
         </PropertyColumn>
