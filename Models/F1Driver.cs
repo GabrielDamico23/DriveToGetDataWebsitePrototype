@@ -11,7 +11,6 @@ namespace DriveToGetDataWebsitePrototype.Models
         public string FamilyName { get; set; } = string.Empty;
         public int PermanentNumber { get; set; } 
         public string Nationality { get; set; } = string.Empty;
-        public string ?Image {get; set; } = string.Empty;
     }
 
 }

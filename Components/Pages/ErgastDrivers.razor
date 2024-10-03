@@ -1,0 +1,49 @@
+﻿@page  "/ergastdrivers"
+
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using DriveToGetDataWebsitePrototype.Services;
+@using DriveToGetDataWebsitePrototype.Models;
+
+@inject ErgastF1Service DriverService
+
+@rendermode InteractiveServer
+
+<PageTitle>Drivers</PageTitle>
+
+<h3>Ergast F1 Drivers Table</h3>
+
+@if (f1drivers == null) //if data is loading slowly
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid class="table" Items="f1drivers" Pagination="@pagination">
+        <PropertyColumn Property="@(d => d.Code)" Title="Code" />
+        <PropertyColumn Property="@(d => d.DriverId)" Title="Driver ID" />
+        <PropertyColumn Property="@(d => d.FamilyName)" Title="Family Name" Sortable="true">
+        </PropertyColumn>
+        <PropertyColumn Property="@(d => d.GivenName)" Title="First Name" Sortable="true" />
+        <PropertyColumn Property="@(d => d.Nationality)" Title="Nationality" />
+        <PropertyColumn Property="@(d => d.DateOfBirth)" Title="DoB" />
+    </QuickGrid>
+
+    <Paginator State="@pagination" /> 
+}
+
+@code
+{
+    private IQueryable<ErgastDriver> f1drivers;
+
+    PaginationState pagination = new PaginationState { ItemsPerPage = 20 };
+
+    private string filterText = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        List<ErgastDriver> ergastDrivers = await DriverService.GetErgastDriversAsync();
+        //List<ErgastDriver> driversList = ergastDrivers;
+        f1drivers = ergastDrivers.AsQueryable();
+    }
+
+}

@@ -23,6 +23,7 @@ builder.Services.AddAuthentication(options =>
     })
     .AddIdentityCookies();
 
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
@@ -34,6 +35,20 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+
+
+string openf1URL = "https://api.openf1.org/";
+string ergastURL = "https://ergast.com/api/";
+
+
+builder.Services.AddScoped(sp => new HttpClient
+{
+    BaseAddress = new Uri(ergastURL)
+});
+
+
+builder.Services.AddScoped<DriveToGetDataWebsitePrototype.Services.ErgastF1Service>();
+builder.Services.AddScoped<DriveToGetDataWebsitePrototype.Services.OpenF1Service>();
 
 var app = builder.Build();
 

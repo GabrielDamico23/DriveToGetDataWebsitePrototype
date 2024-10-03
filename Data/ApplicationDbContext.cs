@@ -40,7 +40,7 @@ namespace DriveToGetDataWebsitePrototype.Data
                 new F1Driver { F1DriverId = "schumacher", GivenName = "Mick", FamilyName = "Schumacher", PermanentNumber = 47, Nationality = "German" },
                 new F1Driver { F1DriverId = "vettel", GivenName = "Sebastian", FamilyName = "Vettel", PermanentNumber = 5, Nationality = "German" },
                 new F1Driver { F1DriverId = "latifi", GivenName = "Nicholas", FamilyName = "Latifi", PermanentNumber = 6, Nationality = "Canadian" },
-                new F1Driver { F1DriverId = "Guanyu", GivenName = "Zhou", FamilyName = "Zhou", PermanentNumber = 24, Nationality = "Chinese" },
+                new F1Driver { F1DriverId = "Guanyu", GivenName = "Zhou", FamilyName = "Guanyu", PermanentNumber = 24, Nationality = "Chinese" },
                 new F1Driver { F1DriverId = "sargeant", GivenName = "Logan", FamilyName = "Sargeant", PermanentNumber = 2, Nationality = "American" },
                 new F1Driver { F1DriverId = "albon", GivenName = "Alexander", FamilyName = "Albon", PermanentNumber = 23, Nationality = "Thai" },
                 new F1Driver { F1DriverId = "deVries", GivenName = "Nyck", FamilyName = "de Vries", PermanentNumber = 7, Nationality = "Dutch" },
