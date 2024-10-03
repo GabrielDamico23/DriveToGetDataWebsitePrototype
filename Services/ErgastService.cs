@@ -29,6 +29,12 @@
             return response?.MRData?.ConstructorTable?.Constructors ?? new List<ErgastConstructor>();
         }
 
+        public async Task<List<ErgastCircuit>> GetErgastCircuitsAsync()
+        {
+            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/current/circuits.json");
+            return response?.MRData?.CircuitTable?.Circuits ?? new List<ErgastCircuit>();
+        }
+
         public class ErgastApiResponse
         {
             public ErgastMRData MRData { get; set; }
@@ -38,6 +44,7 @@
         {
             public DriverTable DriverTable { get; set; }
             public ConstructorTable ConstructorTable { get; set; }
+            public CircuitTable CircuitTable { get; set; }
         }
 
         public class DriverTable
@@ -48,6 +55,11 @@
         public class ConstructorTable
         {
             public List<ErgastConstructor> Constructors { get; set; }
+        }
+
+        public class CircuitTable
+        {
+            public List<ErgastCircuit> Circuits { get; set; }
         }
     }
 

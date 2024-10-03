@@ -1,0 +1,47 @@
+﻿@page "/ergastcircuits"
+
+@using Microsoft.AspNetCore.Components.QuickGrid
+@using DriveToGetDataWebsitePrototype.Services;
+@using DriveToGetDataWebsitePrototype.Models;
+
+@inject ErgastF1Service CircuitService
+
+@rendermode InteractiveServer
+
+<PageTitle>Circuits</PageTitle>
+
+<h3>Ergast F1 Circuits Table</h3>
+
+@if (f1circuits == null) //if data is loading slowly
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <QuickGrid class="table" Items="f1circuits" Pagination="@pagination">
+        <PropertyColumn Property="@(d => d.CircuitId)" Title="Circuit ID" />
+        <PropertyColumn Property="@(d => d.CircuitName)" Title="Circuit Name" Sortable="true">
+        </PropertyColumn>
+        <PropertyColumn Property="@(d => d.Locality)" Title="Locality" Sortable="true" />
+        <PropertyColumn Property="@(d => d.Country)" Title="Country" />
+    </QuickGrid>
+
+    <Paginator State="@pagination" />
+}
+
+@code
+{
+    private IQueryable<ErgastCircuit> f1circuits;
+
+    PaginationState pagination = new PaginationState { ItemsPerPage = 20 };
+
+    private string filterText = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        List<ErgastCircuit> ergastCircuits = await CircuitService.GetErgastCircuitsAsync();
+        //List<ErgastDriver> driversList = ergastDrivers;
+        f1circuits = ergastCircuits.AsQueryable();
+    }
+
+}
