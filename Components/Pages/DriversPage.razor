@@ -1,36 +1,62 @@
-﻿﻿@*This page will display a list of all current F1 Drivers as a table*@
-
-@page "/drivers"
+﻿@page "/drivers"
 @using DriveToGetDataWebsitePrototype.Data
 @using DriveToGetDataWebsitePrototype.Models
+@using Microsoft.EntityFrameworkCore
 @inject ApplicationDbContext DbContext
 
-<h3>DriversPage</h3>
+<h3>Drivers</h3>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Driver ID</th>
-            <th>Given Name</th>
-            <th>Family Name</th>
-            <th>Permanent Number</th>
-            <th>Nationality</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var driver in drivers)
-        {
-            <tr>
-                <td>@driver.F1DriverId</td>
-                <td>@driver.GivenName</td>
-                <td>@driver.FamilyName</td>
-                <td>@driver.PermanentNumber</td>
-                <td>@driver.Nationality</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<select id="DriverSelect" @onchange="OnDriverSelected">
+    <option value="">Select a driver</option>
+    @foreach (var driver in drivers)
+    {
+        <option value="@driver.F1DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option> // Display driver name in a dropdown list
+    }
+</select>
+
+@if (selectedDriver != null) // Display driver details if a driver is selected
+{
+    <div>
+        @*//driver details*@
+        <h4>@($"{selectedDriver.GivenName} {selectedDriver.FamilyName}")</h4> 
+        <p>Nationality: @selectedDriver.Nationality</p>
+        <p>Permanent Number: @selectedDriver.PermanentNumber</p>
+    </div>
+}
+else
+{
+    <p>Select a driver to see details.</p>
+}
 
 @code {
-    private IQueryable<F1Driver> drivers => DbContext.Drivers;
+    private List<F1Driver> drivers = new List<F1Driver>(); // New list of drivers to store driver details
+    private F1Driver selectedDriver; // Selected driver
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDrivers(); // Load drivers from the database
+    }
+
+    private async Task LoadDrivers()
+    {
+        drivers = await DbContext.Drivers.ToListAsync(); // Get all drivers from the database Driver table and store in the drivers list
+    }
+
+    private async Task OnDriverSelected(ChangeEventArgs e)
+    {
+        var driverId = e.Value?.ToString(); // Get the selected driver ID from the dropdown list
+
+        if (!string.IsNullOrEmpty(driverId)) // If a driver is selected
+        {
+            selectedDriver = await DbContext.Drivers
+                .FirstOrDefaultAsync(d => d.F1DriverId == driverId); // Get driver details
+
+            StateHasChanged(); // Refresh component
+        }
+        else
+        {
+            selectedDriver = null; // Reset if no driver is selected
+            StateHasChanged();
+        }
+    }
 }
