@@ -1,0 +1,86 @@
+﻿@page "/f1constructors"
+@using DriveToGetDataWebsitePrototype.Data
+@using DriveToGetDataWebsitePrototype.Models
+@using Microsoft.EntityFrameworkCore
+@inject ApplicationDbContext DbContext
+@rendermode InteractiveServer
+
+<div class="PageHeader">
+    <h2>Formula 1 Constructors</h2>
+</div>
+<div class="UserSelection">
+    <p>This page will be displaying Formula 1 constructor details only for the year 2024.</p>
+    <p>Formula 1 constructors are the teams that design and build the cars that compete in Formula 1. They are responsible for the design, development, and construction of the cars, as well as the management of the team and the drivers.</p>
+    <br />
+    <p>Choose a constructor to learn more about them:</p>
+
+    <select id="ConstructorSelect" @onchange="OnConstructorSelected">
+        <option value="">Select a constructor</option>
+        @foreach (var constructor in constructors)
+        {
+            <option value="@constructor.ConstructorId">@($"{constructor.ConstructorName}")</option>
+            // Display constructor name in a dropdown list
+        }
+    </select>
+</div>
+
+<div class="UserSelectionInformation">
+    @if (selectedConstructor != null) // Display constructor details if a constructor is selected
+    {
+        <div>
+            @*//constructor details*@
+            <h3>You have selected: @($"{selectedConstructor.ConstructorName}")</h3>
+            <p>@($"{selectedConstructor.ConstructorName}") is a @selectedConstructor.Nationality team. They currently have @selectedConstructor.Driver1 and @selectedConstructor.Driver2 on their team for the 2024 season. </p>
+            <p>If you would like more information on @($"{selectedConstructor.ConstructorName}"), kindly click <a href="@selectedConstructor.Url" target="_blank">here</a></p>
+        </div>
+    }
+    else  // Display message if no constructor is selected)
+    {
+        <p>Select a constructor to see details.</p>
+    }
+</div>
+
+<div class="PageFooter">
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/racedata">Race Data</a></li>
+        <li><a href="/f1constructors">Formula 1</a></li>
+        <li><a href="/f1drivers">Drivers</a></li>
+        <li><a href="/f1circuits">Circuits</a></li>
+        <li><a href="/contactus">Contact Us</a></li>
+    </ul>
+</div>
+
+
+@code {
+    private List<Constructor> constructors = new List<Constructor>(); // New list of constructors to store constructor details
+    private Constructor selectedConstructor; // Selected constructor
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadConstructors(); // Load constructors from the database
+    }
+
+    private async Task LoadConstructors()
+    {
+        constructors = await DbContext.Constructors.ToListAsync(); // Get all constructors from the database Constructor table and store in the constructors list
+    }
+
+    private async Task OnConstructorSelected(ChangeEventArgs e)
+    {
+        var constructorId = e.Value?.ToString(); // Get the selected constructor ID from the dropdown list
+
+        if (!string.IsNullOrEmpty(constructorId)) // If a constructor is selected
+        {
+            selectedConstructor = await DbContext.Constructors
+                .FirstOrDefaultAsync(d => d.ConstructorId == constructorId); // Get constructor details
+
+            StateHasChanged(); // Refresh component
+        }
+        else
+        {
+            selectedConstructor = null; // Reset if no constructor is selected
+            StateHasChanged();
+        }
+    }
+}

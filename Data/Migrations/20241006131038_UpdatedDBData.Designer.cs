@@ -4,6 +4,7 @@ using DriveToGetDataWebsitePrototype.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DriveToGetDataWebsitePrototype.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241006131038_UpdatedDBData")]
+    partial class UpdatedDBData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -324,14 +327,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Driver1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Driver2")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nationality")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -349,17 +344,13 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "alpine",
                             ConstructorName = "Alpine F1 Team",
-                            Driver1 = "Pierre Gasly",
-                            Driver2 = "Esteban Ocon",
                             Nationality = "French",
                             Url = "http://en.wikipedia.org/wiki/Alpine_F1_Team"
                         },
                         new
                         {
-                            ConstructorId = "aston_martin",
+                            ConstructorId = "astone_martin",
                             ConstructorName = "Aston Martin",
-                            Driver1 = "Fernando Alonso",
-                            Driver2 = "Lance Stoll",
                             Nationality = "British",
                             Url = "http://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One"
                         },
@@ -367,8 +358,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "ferrari",
                             ConstructorName = "Ferrari",
-                            Driver1 = "Charles Leclerc",
-                            Driver2 = "Carlos Sainz",
                             Nationality = "Italian",
                             Url = "http://en.wikipedia.org/wiki/Scuderia_Ferrari"
                         },
@@ -376,8 +365,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "haas",
                             ConstructorName = "Haas F1 Team",
-                            Driver1 = "Nico Hülkenberg",
-                            Driver2 = "Kevin Magnussen",
                             Nationality = "American",
                             Url = "http://en.wikipedia.org/wiki/Haas_F1_Team"
                         },
@@ -385,8 +372,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "mclaren",
                             ConstructorName = "McLaren",
-                            Driver1 = "Lando Norris",
-                            Driver2 = "Oscar Piastri",
                             Nationality = "British",
                             Url = "http://en.wikipedia.org/wiki/McLaren"
                         },
@@ -394,8 +379,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "mercedes",
                             ConstructorName = "Mercedes",
-                            Driver1 = "Lewis Hamilton",
-                            Driver2 = "George Russell",
                             Nationality = "German",
                             Url = "http://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One"
                         },
@@ -403,8 +386,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "rb",
                             ConstructorName = "RB F1 Team",
-                            Driver1 = "Yuki Tsunoda",
-                            Driver2 = "Liam Lawson",
                             Nationality = "Italian",
                             Url = "http://en.wikipedia.org/wiki/RB_Formula_One_Team"
                         },
@@ -412,8 +393,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "red_bull",
                             ConstructorName = "Red Bull",
-                            Driver1 = "Max Verstappen",
-                            Driver2 = "Sergio Pérez",
                             Nationality = "Austrian",
                             Url = "http://en.wikipedia.org/wiki/Red_Bull_Racing"
                         },
@@ -421,8 +400,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "sauber",
                             ConstructorName = "Sauber",
-                            Driver1 = "Valtteri Bottas",
-                            Driver2 = "Guanyu Zhou",
                             Nationality = "Swiss",
                             Url = "http://en.wikipedia.org/wiki/Sauber_Motorsport"
                         },
@@ -430,8 +407,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             ConstructorId = "williams",
                             ConstructorName = "Williams",
-                            Driver1 = "Alexander Albon",
-                            Driver2 = "Franco Colapinto",
                             Nationality = "British",
                             Url = "http://en.wikipedia.org/wiki/Williams_Grand_Prix_Engineering"
                         });
@@ -694,8 +669,8 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         {
                             F1DriverId = "zhou",
                             DateOfBirth = "1999-05-30",
-                            FamilyName = "Zhou",
-                            GivenName = "Guanyu",
+                            FamilyName = "Guanyu",
+                            GivenName = "Zhou",
                             Nationality = "Chinese",
                             PermanentNumber = 24,
                             Url = "http://en.wikipedia.org/wiki/Zhou_Guanyu"

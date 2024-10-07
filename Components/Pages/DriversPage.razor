@@ -1,32 +1,55 @@
-﻿@page "/drivers"
+﻿@page "/f1drivers"
 @using DriveToGetDataWebsitePrototype.Data
 @using DriveToGetDataWebsitePrototype.Models
 @using Microsoft.EntityFrameworkCore
 @inject ApplicationDbContext DbContext
+@rendermode InteractiveServer
 
-<h3>Drivers</h3>
+<div class="PageHeader">
+    <h2>Formula 1 Drivers</h2>
+</div>
+<div class="UserSelection">
+    <p>This page will be displaying Formula 1 drivers details for drivers which raced between 2022 and 2024.</p>
+    <br/>
+    <p>Choose a driver to learn more about them:</p>
 
-<select id="DriverSelect" @onchange="OnDriverSelected">
-    <option value="">Select a driver</option>
-    @foreach (var driver in drivers)
+    <select id="DriverSelect" @onchange="OnDriverSelected">
+        <option value="">Select a driver</option>
+        @foreach (var driver in drivers)
+        {
+            <option value="@driver.F1DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option> // Display driver name in a dropdown list
+        }
+    </select>
+</div>
+
+<div class="UserSelectionInformation">
+    @if (selectedDriver != null) // Display driver details if a driver is selected
     {
-        <option value="@driver.F1DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option> // Display driver name in a dropdown list
+        <div>
+            @*//driver details*@
+            <h3>You have selected: @($"{selectedDriver.GivenName} {selectedDriver.FamilyName}")</h3>
+            <p>@($"{selectedDriver.GivenName} {selectedDriver.FamilyName}") is a @selectedDriver.Nationality driver and was born in @selectedDriver.DateOfBirth. He races with the number @selectedDriver.PermanentNumber.</p>
+            <p>If you would like more information on @($"{selectedDriver.GivenName} {selectedDriver.FamilyName}"), kindly click <a href="@selectedDriver.Url" target="_blank">here</a></p>
+        </div> 
     }
-</select>
+    else  // Display message if no driver is selected)
+    {
+        <p>Select a driver to see details.</p>
+    }
+</div>
 
-@if (selectedDriver != null) // Display driver details if a driver is selected
-{
-    <div>
-        @*//driver details*@
-        <h4>@($"{selectedDriver.GivenName} {selectedDriver.FamilyName}")</h4> 
-        <p>Nationality: @selectedDriver.Nationality</p>
-        <p>Permanent Number: @selectedDriver.PermanentNumber</p>
-    </div>
-}
-else
-{
-    <p>Select a driver to see details.</p>
-}
+<div class="PageFooter">
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/racedata">Race Data</a></li>
+        <li><a href="/f1constructors">Formula 1</a></li>
+        <li><a href="/f1drivers">Drivers</a></li>
+        <li><a href="/f1circuits">Circuits</a></li>
+        <li><a href="/contactus">Contact Us</a></li>
+    </ul>
+</div>
+
+
 
 @code {
     private List<F1Driver> drivers = new List<F1Driver>(); // New list of drivers to store driver details

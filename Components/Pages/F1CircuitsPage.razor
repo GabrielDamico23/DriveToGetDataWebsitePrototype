@@ -1,0 +1,87 @@
+﻿@page "/f1circuits"
+@using DriveToGetDataWebsitePrototype.Data
+@using DriveToGetDataWebsitePrototype.Models
+@using Microsoft.EntityFrameworkCore
+@inject ApplicationDbContext DbContext
+@rendermode InteractiveServer
+
+<div class="PageHeader">
+    <h2>Formula 1 Circuits</h2>
+</div>
+<div class="UserSelection">
+    <p>This page will be displaying Formula 1 circuit details for the circuits which were used for a race between 2022 and 2024.</p>
+    <p>Formula 1 races are held in more than 20 different circuits, located all around the globe during a Formula 1 season.</p>
+    <br />
+    <p>Choose a circuit below to learn more about them:</p>
+
+    <select id="CircuitSelect" @onchange="OnCircuitSelected">
+        <option value="">Select a circuit</option>
+        @foreach (var circuit in circuits)
+        {
+            <option value="@circuit.CircuitId">@($"{circuit.CircuitName}")</option>
+            // Display circuit name in a dropdown list
+        }
+    </select>
+</div>
+
+<div class="UserSelectionInformation">
+    @if (selectedCircuit != null) // Display circuit details if a circuit is selected
+    {
+        <div>
+            @*//circuit details*@
+            <h3>You have selected: @($"{selectedCircuit.CircuitName}") Circuit</h3>
+            <p>@($"{selectedCircuit.CircuitName}") is located in  @selectedCircuit.Locality, in @selectedCircuit.Country.</p>
+            <p>If you would like more information on @($"{selectedCircuit.CircuitName}"), kindly click <a href="@selectedCircuit.Url" target="_blank">here</a></p>
+        </div>
+    }
+    else  // Display message if no circuit is selected)
+    {
+        <p>Select a circuit to see details.</p>
+    }
+</div>
+
+<div class="PageFooter">
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/racedata">Race Data</a></li>
+        <li><a href="/f1constructors">Formula 1</a></li>
+        <li><a href="/f1drivers">Drivers</a></li>
+        <li><a href="/f1circuits">Circuits</a></li>
+        <li><a href="/contactus">Contact Us</a></li>
+    </ul>
+</div>
+
+
+
+@code {
+    private List<Circuit> circuits = new List<Circuit>(); // New list of circuits to store circuit details
+    private Circuit selectedCircuit; // Selected circuit
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadCircuits(); // Load circuits from the database
+    }
+
+    private async Task LoadCircuits()
+    {
+        circuits = await DbContext.Circuits.ToListAsync(); // Get all circuits from the database Circuits table and store in the circuits list
+    }
+
+    private async Task OnCircuitSelected(ChangeEventArgs e)
+    {
+        var circuitId = e.Value?.ToString(); // Get the selected circuit ID from the dropdown list
+
+        if (!string.IsNullOrEmpty(circuitId)) // If a circuit is selected
+        {
+            selectedCircuit = await DbContext.Circuits
+                .FirstOrDefaultAsync(d => d.CircuitId == circuitId); // Get circuit details
+
+            StateHasChanged(); // Refresh component
+        }
+        else
+        {
+            selectedCircuit = null; // Reset if no circuit is selected
+            StateHasChanged();
+        }
+    }
+}
