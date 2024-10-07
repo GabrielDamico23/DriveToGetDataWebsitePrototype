@@ -19,20 +19,14 @@
 
         public async Task<List<ErgastDriver>> GetErgastDriversAsync()
         {
-            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url+"/current/drivers.json");
+            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url+"/2024/drivers.json");
             return response?.MRData?.DriverTable?.Drivers ?? new List<ErgastDriver>();
         }
 
-        public async Task<List<ErgastConstructor>> GetErgastConstructorsAsync()
+        public async Task<List<ErgastRaceRound>> GetErgastRaceRoundsAsync()
         {
-            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/current/constructors.json");
-            return response?.MRData?.ConstructorTable?.Constructors ?? new List<ErgastConstructor>();
-        }
-
-        public async Task<List<ErgastCircuit>> GetErgastCircuitsAsync()
-        {
-            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/current/circuits.json");
-            return response?.MRData?.CircuitTable?.Circuits ?? new List<ErgastCircuit>();
+            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024.json");
+            return response?.MRData?.RaceTable?.RaceRounds ?? new List<ErgastRaceRound>();
         }
 
         public class ErgastApiResponse
@@ -43,8 +37,7 @@
         public class ErgastMRData
         {
             public DriverTable DriverTable { get; set; }
-            public ConstructorTable ConstructorTable { get; set; }
-            public CircuitTable CircuitTable { get; set; }
+            public RaceTable RaceTable { get; set; }
         }
 
         public class DriverTable
@@ -52,15 +45,17 @@
             public List<ErgastDriver> Drivers { get; set; }
         }
 
-        public class ConstructorTable
+        public class RaceTable
         {
-            public List<ErgastConstructor> Constructors { get; set; }
+            public ResultsList ResultsList { get; set; }
+            public List<ErgastRaceRound> RaceRounds { get; set; }
         }
 
-        public class CircuitTable
+        public class ResultsList
         {
-            public List<ErgastCircuit> Circuits { get; set; }
+            public List<ErgastResult> Results { get; set; }
         }
+
     }
 
 }

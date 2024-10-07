@@ -1,16 +1,16 @@
 ﻿@page  "/ergastdrivers"
 
-@using Microsoft.AspNetCore.Components.QuickGrid
+@using Microsoft.AspNetCore.Components.Forms
 @using DriveToGetDataWebsitePrototype.Services;
 @using DriveToGetDataWebsitePrototype.Models;
 
-@inject ErgastF1Service DriverService
+@inject ErgastF1Service DriverService 
 
 @rendermode InteractiveServer
 
 <PageTitle>Drivers</PageTitle>
 
-<h3>Ergast F1 Drivers Table</h3>
+<h3>Ergast F1 Drivers List</h3>
 
 @if (f1drivers == null) //if data is loading slowly
 {
@@ -18,31 +18,37 @@
 }
 else
 {
-    <QuickGrid class="table" Items="f1drivers" Pagination="@pagination">        
-        <PropertyColumn Property="@(d => d.DriverId)" Title="Driver ID" />
-        <PropertyColumn Property="@(d => d.FamilyName)" Title="Family Name" Sortable="true">
-        </PropertyColumn>
-        <PropertyColumn Property="@(d => d.GivenName)" Title="First Name" Sortable="true" />
-        <PropertyColumn Property="@(d => d.Nationality)" Title="Nationality" />
-        <PropertyColumn Property="@(d => d.DateOfBirth)" Title="DoB" />
-    </QuickGrid>
-
-    <Paginator State="@pagination" /> 
+    <div class="form-group">
+        <label for="driverSelect">Select a Driver:</label>
+        <select id="driverSelect" class="form-control" @bind="selectedDriver">
+            <option value="">-- Select a Driver --</option>
+            @foreach (var driver in f1drivers)
+            {
+                <option value="@driver.DriverId">@driver.GivenName @driver.FamilyName</option>
+            }
+        </select>
+    </div>
 }
 
+
+
+@if (!string.IsNullOrEmpty(selectedDriver))
+{
+    var selectedDriverData = f1drivers.FirstOrDefault(driver => driver.DriverId == selectedDriver);
+    if (selectedDriverData != null)
+    {
+        <h4>Selected Driver: @selectedDriverData.GivenName</h4>
+        <p>Driver ID: @selectedDriverData.DriverId</p>
+        <p>Nationality: @selectedDriverData.Nationality</p>
+    }
+}
 @code
 {
-    private IQueryable<ErgastDriver> f1drivers;
-
-    PaginationState pagination = new PaginationState { ItemsPerPage = 20 };
-
-    private string filterText = "";
+    private List<ErgastDriver> f1drivers;
+    private string selectedDriver;
 
     protected override async Task OnInitializedAsync()
     {
-        List<ErgastDriver> ergastDrivers = await DriverService.GetErgastDriversAsync();
-        //List<ErgastDriver> driversList = ergastDrivers;
-        f1drivers = ergastDrivers.AsQueryable();
+        f1drivers = await DriverService.GetErgastDriversAsync();
     }
-
 }
