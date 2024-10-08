@@ -5,15 +5,15 @@
 @inject ApplicationDbContext DbContext
 @rendermode InteractiveServer
 
-<div class="PageHeader">
+<div class="HeaderInfo">
     <h2>Formula 1 Constructors</h2>
-</div>
-<div class="UserSelection">
     <p>This page will be displaying Formula 1 constructor details only for the year 2024.</p>
     <p>Formula 1 constructors are the teams that design and build the cars that compete in Formula 1. They are responsible for the design, development, and construction of the cars, as well as the management of the team and the drivers.</p>
     <br />
     <p>Choose a constructor to learn more about them:</p>
+</div>
 
+<div class="UserSelection">
     <select id="ConstructorSelect" @onchange="OnConstructorSelected">
         <option value="">Select a constructor</option>
         @foreach (var constructor in constructors)

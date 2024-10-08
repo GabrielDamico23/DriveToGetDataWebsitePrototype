@@ -9,6 +9,7 @@ namespace DriveToGetDataWebsitePrototype.Data
         public DbSet<F1Driver> Drivers { get; set; }
         public DbSet<Constructor> Constructors { get; set; }
         public DbSet<Circuit> Circuits { get; set; }
+        public DbSet<ContactUs> ContactUsForms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -16,6 +17,7 @@ namespace DriveToGetDataWebsitePrototype.Data
             modelBuilder.Entity<F1Driver>().ToTable("Drivers");
             modelBuilder.Entity<Constructor>().ToTable("Constructors");
             modelBuilder.Entity<Circuit>().ToTable("Circuits");
+            modelBuilder.Entity<ContactUs>().ToTable("ContactUsForms");
 
             modelBuilder.Entity<F1Driver>().HasData(
                 new F1Driver { F1DriverId = "hamilton", GivenName = "Lewis", FamilyName = "Hamilton", PermanentNumber = 44, Nationality = "British", DateOfBirth = "1985-01-07", Url = "http://en.wikipedia.org/wiki/Lewis_Hamilton" },
@@ -48,7 +50,7 @@ namespace DriveToGetDataWebsitePrototype.Data
             );
 
             modelBuilder.Entity<Constructor>().HasData(
-                new Constructor { ConstructorId = "alpine", ConstructorName = "Alpine F1 Team", Nationality = "French", Url = "http://en.wikipedia.org/wiki/Alpine_F1_Team", Driver1 ="Pierre Gasly", Driver2 = "Esteban Ocon" },
+                new Constructor { ConstructorId = "alpine", ConstructorName = "Alpine F1 Team", Nationality = "French", Url = "http://en.wikipedia.org/wiki/Alpine_F1_Team", Driver1 = "Pierre Gasly", Driver2 = "Esteban Ocon" },
                 new Constructor { ConstructorId = "aston_martin", ConstructorName = "Aston Martin", Nationality = "British", Url = "http://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One", Driver1 = "Fernando Alonso", Driver2 = "Lance Stoll" },
                 new Constructor { ConstructorId = "ferrari", ConstructorName = "Ferrari", Nationality = "Italian", Url = "http://en.wikipedia.org/wiki/Scuderia_Ferrari", Driver1 = "Charles Leclerc", Driver2 = "Carlos Sainz" },
                 new Constructor { ConstructorId = "haas", ConstructorName = "Haas F1 Team", Nationality = "American", Url = "http://en.wikipedia.org/wiki/Haas_F1_Team", Driver1 = "Nico Hülkenberg", Driver2 = "Kevin Magnussen" },
@@ -70,7 +72,7 @@ namespace DriveToGetDataWebsitePrototype.Data
                 new Circuit { CircuitId = "imola", CircuitName = "Autodromo Enzo e Dino Ferrari", Locality = "Imola", Country = "Italy", Url = "http://en.wikipedia.org/wiki/Autodromo_Enzo_e_Dino_Ferrari" },
                 new Circuit { CircuitId = "interlagos", CircuitName = "Autodromo Jose Carlos Pace", Locality = "Sao Paulo", Country = "Brazil", Url = "http://en.wikipedia.org/wiki/Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace" },
                 new Circuit { CircuitId = "jeddah", CircuitName = "Jeddah Corniche Circuit", Locality = "Jeddah", Country = "Saudi Arabia", Url = "http://en.wikipedia.org/wiki/Jeddah_Street_Circuit" },
-                new Circuit { CircuitId = "losail", CircuitName = "Losail International Circuit", Locality = "Al Daayen", Country = "Qatar", Url="http://en.wikipedia.org/wiki/Losail_International_Circuit" },
+                new Circuit { CircuitId = "losail", CircuitName = "Losail International Circuit", Locality = "Al Daayen", Country = "Qatar", Url = "http://en.wikipedia.org/wiki/Losail_International_Circuit" },
                 new Circuit { CircuitId = "marina_bay", CircuitName = "Marina Bay Street Circuit", Locality = "Marina Bay", Country = "Singapore", Url = "http://en.wikipedia.org/wiki/Marina_Bay_Street_Circuit" },
                 new Circuit { CircuitId = "miami", CircuitName = "Miami International Autodrome", Locality = "Miami", Country = "USA", Url = "http://en.wikipedia.org/wiki/Miami_International_Autodrome" },
                 new Circuit { CircuitId = "monaco", CircuitName = "Circuit de Monaco", Locality = "Monte Carlo", Country = "Monaco", Url = "http://en.wikipedia.org/wiki/Circuit_de_Monaco" },

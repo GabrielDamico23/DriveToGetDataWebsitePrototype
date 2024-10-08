@@ -1,0 +1,82 @@
+﻿@page "/contactus"
+@using DriveToGetDataWebsitePrototype.Data
+@using DriveToGetDataWebsitePrototype.Models
+@using Microsoft.EntityFrameworkCore
+@using System.Net.Mail
+@inject ApplicationDbContext DbContext
+@rendermode InteractiveServer
+
+<div class="HeaderInfo">
+    <h1>Contact Us</h1>
+    <h5>Got any ideas on how we can make this website better or anything new you'd like to see?
+        Feel free to share your comments with us below.</h5>
+    <p>Please provide us with an email address so we can contact you back if needed.</p>
+</div>
+
+<div class="ContactForm">
+    @if (showThankYouMessage)
+    {
+        <p>Thank you for your feedback!</p>
+    }
+    else
+    {
+        <form @onsubmit="SubmitForm">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" placeholder="Please provide your email" @bind="@contactUs.Email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message:</label>
+                <textarea class="form-control" id="message" placeholder="Type your message here..." @bind="@contactUs.Message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    }
+</div>
+
+<div class="PageFooter">
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/racedata">Race Data</a></li>
+        <li><a href="/f1constructors">Formula 1</a></li>
+        <li><a href="/f1drivers">Drivers</a></li>
+        <li><a href="/f1circuits">Circuits</a></li>
+        <li><a href="/contactus">Contact Us</a></li>
+    </ul>
+    <p>This is a website prototype to be used in a Computing project by STU 84304 at Arden University and will be submitted in October 2024. This website is not to be published. </p>
+</div>
+
+@code {
+    private ContactUs contactUs = new ContactUs();
+    private bool showThankYouMessage = false;
+
+    private async Task SubmitForm()
+    {
+        // Send email
+        string emailBody = $"Email: {contactUs.Email}\nMessage: {contactUs.Message}";
+        await SendEmail("dtgdcontactus@gmail.com", "New Contact Form Submission", emailBody);
+
+        showThankYouMessage = true;
+    }
+
+    private async Task SendEmail(string recipient, string subject, string body)
+    {
+        using (var client = new SmtpClient("smtp.gmail.com", 587))
+        {
+            client.Credentials = new System.Net.NetworkCredential("dtgdcontactus@gmail.com", "ecrgstpcbwiykaxn");
+            client.EnableSsl = true;
+
+            var message = new MailMessage
+                {
+                    From = new MailAddress("dtgdcontactus@gmail.com"),
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = false,
+                };
+            message.To.Add(recipient);
+
+            // Send email asynchronously
+            await client.SendMailAsync(message);
+        }
+    }
+}

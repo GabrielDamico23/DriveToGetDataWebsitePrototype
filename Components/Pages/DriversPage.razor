@@ -5,14 +5,13 @@
 @inject ApplicationDbContext DbContext
 @rendermode InteractiveServer
 
-<div class="PageHeader">
+<div class="HeaderInfo">
     <h2>Formula 1 Drivers</h2>
-</div>
-<div class="UserSelection">
     <p>This page will be displaying Formula 1 drivers details for drivers which raced between 2022 and 2024.</p>
     <br/>
     <p>Choose a driver to learn more about them:</p>
-
+</div>
+<div class="UserSelection">
     <select id="DriverSelect" @onchange="OnDriverSelected">
         <option value="">Select a driver</option>
         @foreach (var driver in drivers)

@@ -5,15 +5,15 @@
 @inject ApplicationDbContext DbContext
 @rendermode InteractiveServer
 
-<div class="PageHeader">
+<div class="HeaderInfo">
     <h2>Formula 1 Circuits</h2>
-</div>
-<div class="UserSelection">
     <p>This page will be displaying Formula 1 circuit details for the circuits which were used for a race between 2022 and 2024.</p>
     <p>Formula 1 races are held in more than 20 different circuits, located all around the globe during a Formula 1 season.</p>
     <br />
     <p>Choose a circuit below to learn more about them:</p>
+</div>
 
+<div class="UserSelection">
     <select id="CircuitSelect" @onchange="OnCircuitSelected">
         <option value="">Select a circuit</option>
         @foreach (var circuit in circuits)
