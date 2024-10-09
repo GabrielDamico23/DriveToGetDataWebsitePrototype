@@ -6,8 +6,12 @@
 @using DriveToGetDataWebsitePrototype.Services;
 @using DriveToGetDataWebsitePrototype.Models;
 
-@inject ErgastF1Service DriverService
-@inject ErgastF1Service RaceRoundService
+@inject ErgastF1Service ergastService
+
+@*
+    You do not need two instances of the same service    
+    //inject ErgastF1Service RaceRoundService
+*@
 
 @rendermode InteractiveServer
 
@@ -27,7 +31,7 @@
     </select>
 </div>
 
-<div>
+@* <div>
     <label for="raceRounds">Race Rounds:</label>
     <select id="raceRounds" @bind="@selectedRaceRound">
         <option value="">Select a race round</option>
@@ -39,14 +43,14 @@
             }
         }
     </select>
-</div>
+</div> *@
 
 @if (!string.IsNullOrEmpty(selectedDriver) && !string.IsNullOrEmpty(selectedRaceRound))
 {
     <h4>Results:</h4>
     <p>Loading...</p>
-    <button @onclick="GetResults">Get Results</button>
-    @if (results != null)
+    @* <button @onclick="GetResults">Get Results</button> *@
+    @if (raceResults != null)
     {
         <table>
             <thead>
@@ -63,18 +67,18 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var result in results)
+                @foreach (var result in raceResults)
                 {
                     <tr>
-                        <td>@result.GivenName @result.FamilyName</td>
-                        <td>@result.Name</td>
+                        <td>@result.Driver.GivenName @result.Driver.FamilyName</td>
+                        <td>@result.Constructor.ConstructorName</td>
                         <td>@result.Grid</td>
                         <td>@result.Position</td>
                         <td>@result.Points</td>
                         <td>@result.Laps</td>
                         <td>@result.Status</td>
-                        <td>@result.FastestLapTime</td>
-                        <td>@result.AverageSpeed</td>
+                        @* <td>@result.FastestLapTime</td>
+                        <td>@result.AverageSpeed</td> *@
                     </tr>
                 }
             </tbody>
@@ -82,21 +86,24 @@
     }
 }
 
-@code {
-    private List<ErgastDriver> drivers;
-    private List<ErgastRaceRound> raceRounds;
+@code 
+{
+    private List<Driver> drivers;
+    private List<Result> raceResults;
+
     private string selectedDriver;
     private string selectedRaceRound;
-    private List<ErgastResult> results;
+
+//    private List<ErgastResult> results;
 
     protected override async Task OnInitializedAsync()
     {
-        drivers = await DriverService.GetErgastDriversAsync();
-        raceRounds = await RaceRoundService.GetErgastRaceRoundsAsync();
+        drivers = await ergastService.GetErgastDriversAsync();
+        raceResults = await ergastService.GetRaceResultsAsync();
     }
 
     private async Task GetResults()
     {
-        results = await httpClient.GetFromJsonAsync<List<ErgastResult>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
+        raceResults = await httpClient.GetFromJsonAsync<List<Result>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
     }
 }

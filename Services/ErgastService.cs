@@ -17,16 +17,16 @@
             _httpClient = httpClient;
         }
 
-        public async Task<List<ErgastDriver>> GetErgastDriversAsync()
+        public async Task<List<Driver>> GetErgastDriversAsync()
         {
             var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url+"/2024/drivers.json");
-            return response?.MRData?.DriverTable?.Drivers ?? new List<ErgastDriver>();
+            return response?.MRData?.DriverTable?.Drivers ?? new List<Driver>();
         }
 
-        public async Task<List<ErgastRaceRound>> GetErgastRaceRoundsAsync()
+        public async Task<List<Result>> GetRaceResultsAsync()
         {
-            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024.json");
-            return response?.MRData?.RaceTable?.RaceRounds ?? new List<ErgastRaceRound>();
+            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024/1/results.json");
+            return response?.MRData?.RaceTable?.Race?.ResultsList ?? new List<Result>();
         }
 
         public class ErgastApiResponse
@@ -42,19 +42,24 @@
 
         public class DriverTable
         {
-            public List<ErgastDriver> Drivers { get; set; }
+            public List<Driver> Drivers { get; set; }
         }
 
         public class RaceTable
         {
-            public ResultsList ResultsList { get; set; }
-            public List<ErgastRaceRound> RaceRounds { get; set; }
+            //public ResultsList ResultsList { get; set; }
+            //public List<ErgastRaceRound> RaceRounds { get; set; }
+            public Race Race { get; set; }
         }
+        //public class RaceSeason
+        //{
+        //    public RaceName RaceName { get; set; }
+        //}
 
-        public class ResultsList
-        {
-            public List<ErgastResult> Results { get; set; }
-        }
+        //public class ResultsList
+        //{
+        //    public List<Result> Results { get; set; }
+        //}
 
     }
 

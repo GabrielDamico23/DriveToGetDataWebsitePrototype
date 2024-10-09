@@ -1,7 +1,9 @@
 ﻿@page "/f1drivers"
+
 @using DriveToGetDataWebsitePrototype.Data
 @using DriveToGetDataWebsitePrototype.Models
 @using Microsoft.EntityFrameworkCore
+
 @inject ApplicationDbContext DbContext
 @rendermode InteractiveServer
 
@@ -17,7 +19,7 @@
         <option value="">Select a driver</option>
         @foreach (var driver in drivers)
         {
-            <option value="@driver.F1DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option> // Display driver name in a dropdown list
+            <option value="@driver.DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option> // Display driver name in a dropdown list
         }
     </select>
 </div>
@@ -53,8 +55,8 @@
 
 
 @code {
-    private List<F1Driver> drivers = new List<F1Driver>(); // New list of drivers to store driver details
-    private F1Driver selectedDriver; // Selected driver
+    private List<Driver> drivers = new List<Driver>(); // New list of drivers to store driver details
+    private Driver selectedDriver; // Selected driver
 
     protected override async Task OnInitializedAsync()
     {
@@ -73,7 +75,7 @@
         if (!string.IsNullOrEmpty(driverId)) // If a driver is selected
         {
             selectedDriver = await DbContext.Drivers
-                .FirstOrDefaultAsync(d => d.F1DriverId == driverId); // Get driver details
+                .FirstOrDefaultAsync(d => d.DriverId == driverId); // Get driver details
 
             StateHasChanged(); // Refresh component
         }
