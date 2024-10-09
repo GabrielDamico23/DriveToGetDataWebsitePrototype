@@ -23,11 +23,12 @@
             return response?.MRData?.DriverTable?.Drivers ?? new List<Driver>();
         }
 
-        public async Task<List<Result>> GetRaceResultsAsync()
+        public async Task<List<Result>> GetRaceResultsAsync(string driver, string round)
         {
-            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024/1/results.json");
+            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024/drivers/" + driver + "/" + round + "/results.json");
             return response?.MRData?.RaceTable?.Race?.ResultsList ?? new List<Result>();
         }
+
 
         public class ErgastApiResponse
         {

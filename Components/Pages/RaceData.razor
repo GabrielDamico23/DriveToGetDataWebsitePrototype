@@ -45,11 +45,17 @@
     </select>
 </div> *@
 
+@{
+    selectedRaceRound = "2";
+}
+
 @if (!string.IsNullOrEmpty(selectedDriver) && !string.IsNullOrEmpty(selectedRaceRound))
 {
-    <h4>Results:</h4>
+    <h4>Race Results: for </h4>
     <p>Loading...</p>
-    @* <button @onclick="GetResults">Get Results</button> *@
+    
+    <button class="btn btn-success" @onclick="GetResults">Get Results</button>
+
     @if (raceResults != null)
     {
         <table>
@@ -77,8 +83,8 @@
                         <td>@result.Points</td>
                         <td>@result.Laps</td>
                         <td>@result.Status</td>
-                        @* <td>@result.FastestLapTime</td>
-                        <td>@result.AverageSpeed</td> *@
+                        <td>@result.FastestLap.Time</td>
+                        <td>@result.FastestLap.AverageSpeed</td>
                     </tr>
                 }
             </tbody>
@@ -94,16 +100,20 @@
     private string selectedDriver;
     private string selectedRaceRound;
 
-//    private List<ErgastResult> results;
+    //    private List<ErgastResult> results;
 
     protected override async Task OnInitializedAsync()
     {
+        // Why not use your db of drivers for the dropdown?
         drivers = await ergastService.GetErgastDriversAsync();
-        raceResults = await ergastService.GetRaceResultsAsync();
+        
+        // do not need the get below
+        //raceResults = await ergastService.GetRaceResultsAsync();
     }
 
     private async Task GetResults()
     {
-        raceResults = await httpClient.GetFromJsonAsync<List<Result>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
+        raceResults = await ergastService.GetRaceResultsAsync(selectedDriver, "1");
+        //httpClient.GetFromJsonAsync<List<Result>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
     }
 }
