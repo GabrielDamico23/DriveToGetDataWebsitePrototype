@@ -26,7 +26,7 @@
         public async Task<List<Result>> GetRaceResultsAsync(string driver, string round)
         {
             var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024/1/drivers/" + driver + "/" + round + "/results.json");
-            return response?.MRData?.RaceTable?.Race?.ResultsList ?? new List<Result>();
+            return response?.MRData?.RaceTable?.Race?.Results ?? new List<Result>();
         }
 
 
@@ -52,8 +52,8 @@
             //public List<ErgastRaceRound> RaceRounds { get; set; }
             public Race Race { get; set; }
         }
-        
-        
+
+
         //public class RaceSeason
         //{
         //    public RaceName RaceName { get; set; }
