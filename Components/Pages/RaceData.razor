@@ -61,31 +61,32 @@
         <table>
             <thead>
                 <tr>
-@*                     <th>Driver</th>
- *@                    <th>Constructor</th>
-                    <th>Starting Grid Position</th>
-                    <th>Finishing Position</th>
+@*                  <th>Race Name</th>
+ *@                 <th>Circuit Name</th>
+                    <th>Date</th>
+                    <th>Results</th>
+@*                  <th>Finishing Position</th>
                     <th>Points</th>
                     <th>Laps completed</th>
                     <th>Finishing Status</th>
                     <th>Fastest Lap Time</th>
                     <th>Fastest Lap Average Speed</th>
-                </tr>
+ *@                </tr>
             </thead>
             <tbody>
                 @foreach (var result in raceResults)
                 {
                     <tr>
-                        <td>@result.Driver.GivenName @result.Driver.FamilyName</td>
-                        <td>@result.ConstructorName</td>
-                        <td>@result.Grid</td>
-                        <td>@result.Position</td>
-                        <td>@result.Points</td>
+                        <td>@result.RaceName</td>
+                        <td>@result.CircuitName</td>
+                        <td>@result.Date</td>
+                        <td>@result.Results.Count</td>
+@*                         <td>@result.Points</td>
                         <td>@result.Laps</td>
                         <td>@result.Status</td>
                         <td>@result.FastestLap.Time</td>
                         <td>@result.FastestLap.AverageSpeed</td>
-                    </tr>
+ *@                    </tr>
                 }
             </tbody>
         </table>
@@ -95,7 +96,7 @@
 @code 
 {
     private List<Driver> drivers;
-    private List<Result> raceResults;
+    private List<RaceResult> raceResults;
 
     private string selectedDriver;
     private string selectedRaceRound;
@@ -113,7 +114,7 @@
 
     private async Task GetResults()
     {
-        raceResults = await ergastService.GetRaceResultsAsync(selectedDriver, "1");
+        raceResults = await ergastService.GetRaceResultsAsync(selectedDriver, 1);
         //httpClient.GetFromJsonAsync<List<Result>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
     }
 }
