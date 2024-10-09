@@ -9,6 +9,7 @@
     <h2>Formula 1 Circuits</h2>
 </div>
 <div class="UserSelection">
+    
     <p>This page will be displaying Formula 1 circuit details for the circuits which were used for a race between 2022 and 2024.</p>
     <p>Formula 1 races are held in more than 20 different circuits, located all around the globe during a Formula 1 season.</p>
     <br />
@@ -54,7 +55,8 @@
 
 
 
-@code {
+@code 
+{
     private List<Circuit> circuits = new List<Circuit>(); // New list of circuits to store circuit details
     private Circuit selectedCircuit; // Selected circuit
 
@@ -65,7 +67,8 @@
 
     private async Task LoadCircuits()
     {
-        circuits = await DbContext.Circuits.ToListAsync(); // Get all circuits from the database Circuits table and store in the circuits list
+        // Get all circuits from the database Circuits table and store in the circuits list
+        circuits = await DbContext.Circuits.ToListAsync();
     }
 
     private async Task OnCircuitSelected(ChangeEventArgs e)

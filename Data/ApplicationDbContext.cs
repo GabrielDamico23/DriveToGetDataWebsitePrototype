@@ -62,33 +62,33 @@ namespace DriveToGetDataWebsitePrototype.Data
 
             // Locality and Country are not used in the seeding of the Circuits table
 
-            //modelBuilder.Entity<Circuit>().HasData(
-            //    new Circuit { CircuitId = "albert_park", CircuitName = "Albert Park Grand Prix Circuit", Locality = "Melbourne", Country = "Australia", Url = "http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit" },
-            //    new Circuit { CircuitId = "americas", CircuitName = "Circuit of the Americas", Locality = "Austin", Country = "USA", Url = "http://en.wikipedia.org/wiki/Circuit_of_the_Americas" },
-            //    new Circuit { CircuitId = "bahrain", CircuitName = "Bahrain International Circuit", Locality = "Sakhir", Country = "Bahrain", Url = "http://en.wikipedia.org/wiki/Bahrain_International_Circuit" },
-            //    new Circuit { CircuitId = "baku", CircuitName = "Baku City Circuit", Locality = "Baku", Country = "Azerbaijan", Url = "http://en.wikipedia.org/wiki/Baku_City_Circuit" },
-            //    new Circuit { CircuitId = "catalunya", CircuitName = "Circuit de Barcelona-Catalunya", Locality = "Montmelo", Country = "Spain", Url = "http://en.wikipedia.org/wiki/Circuit_de_Barcelona-Catalunya" },
-            //    new Circuit { CircuitId = "hungaroring", CircuitName = "Hungaroring", Locality = "Budapest", Country = "Hungary", Url = "http://en.wikipedia.org/wiki/Hungaroring" },
-            //    new Circuit { CircuitId = "imola", CircuitName = "Autodromo Enzo e Dino Ferrari", Locality = "Imola", Country = "Italy", Url = "http://en.wikipedia.org/wiki/Autodromo_Enzo_e_Dino_Ferrari" },
-            //    new Circuit { CircuitId = "interlagos", CircuitName = "Autodromo Jose Carlos Pace", Locality = "Sao Paulo", Country = "Brazil", Url = "http://en.wikipedia.org/wiki/Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace" },
-            //    new Circuit { CircuitId = "jeddah", CircuitName = "Jeddah Corniche Circuit", Locality = "Jeddah", Country = "Saudi Arabia", Url = "http://en.wikipedia.org/wiki/Jeddah_Street_Circuit" },
-            //    new Circuit { CircuitId = "losail", CircuitName = "Losail International Circuit", Locality = "Al Daayen", Country = "Qatar", Url = "http://en.wikipedia.org/wiki/Losail_International_Circuit" },
-            //    new Circuit { CircuitId = "marina_bay", CircuitName = "Marina Bay Street Circuit", Locality = "Marina Bay", Country = "Singapore", Url = "http://en.wikipedia.org/wiki/Marina_Bay_Street_Circuit" },
-            //    new Circuit { CircuitId = "miami", CircuitName = "Miami International Autodrome", Locality = "Miami", Country = "USA", Url = "http://en.wikipedia.org/wiki/Miami_International_Autodrome" },
-            //    new Circuit { CircuitId = "monaco", CircuitName = "Circuit de Monaco", Locality = "Monte Carlo", Country = "Monaco", Url = "http://en.wikipedia.org/wiki/Circuit_de_Monaco" },
-            //    new Circuit { CircuitId = "monza", CircuitName = "Autodromo Nazionale di Monza", Locality = "Monza", Country = "Italy", Url = "http://en.wikipedia.org/wiki/Autodromo_Nazionale_Monza" },
-            //    new Circuit { CircuitId = "red_bull_ring", CircuitName = "Red Bull Ring", Locality = "Spielberg", Country = "Austria", Url = "http://en.wikipedia.org/wiki/Red_Bull_Ring" },
-            //    new Circuit { CircuitId = "ricard", CircuitName = "Circuit Paul Ricard", Locality = "Le Castellet", Country = "France", Url = "http://en.wikipedia.org/wiki/Paul_Ricard_Circuit" },
-            //    new Circuit { CircuitId = "rodriguez", CircuitName = "Autodromo Hermanos Rodriguez", Locality = "Mexico City", Country = "Mexico", Url = "http://en.wikipedia.org/wiki/Aut%C3%B3dromo_Hermanos_Rodr%C3%ADguez" },
-            //    new Circuit { CircuitId = "shanghai", CircuitName = "Shanghai International Circuit", Locality = "Shanghai", Country = "China", Url = "http://en.wikipedia.org/wiki/Shanghai_International_Circuit" },
-            //    new Circuit { CircuitId = "silverstone", CircuitName = "Silverstone Circuit", Locality = "Silverstone", Country = "UK", Url = "http://en.wikipedia.org/wiki/Silverstone_Circuit" },
-            //    new Circuit { CircuitId = "spa", CircuitName = "Circuit de Spa-Francorchamps", Locality = "Spa", Country = "Belgium", Url = "http://en.wikipedia.org/wiki/Circuit_de_Spa-Francorchamps" },
-            //    new Circuit { CircuitId = "suzuka", CircuitName = "Suzuka Circuit", Locality = "Suzuka", Country = "Japan", Url = "http://en.wikipedia.org/wiki/Suzuka_Circuit" },
-            //    new Circuit { CircuitId = "vegas", CircuitName = "Las Vegas Strip Street Circuit", Locality = "Las Vegas", Country = "USA", Url = "https://en.wikipedia.org/wiki/Las_Vegas_Grand_Prix#Circuit" },
-            //    new Circuit { CircuitId = "villeneuve", CircuitName = "Circuit Gilles Villeneuve", Locality = "Montreal", Country = "Canada", Url = "http://en.wikipedia.org/wiki/Circuit_Gilles_Villeneuve" },
-            //    new Circuit { CircuitId = "yas_marina", CircuitName = "Yas Marina Circuit", Locality = "Abu Dhabi", Country = "UAE", Url = "http://en.wikipedia.org/wiki/Yas_Marina_Circuit" },
-            //    new Circuit { CircuitId = "zandvoort", CircuitName = "Circuit Zandvoort", Locality = "Zandvoort", Country = "Netherlands", Url = "http://en.wikipedia.org/wiki/Circuit_Zandvoort" }
-            //);
+            modelBuilder.Entity<Circuit>().HasData(
+                new Circuit { CircuitId = "albert_park", CircuitName = "Albert Park Grand Prix Circuit", Locality = "Melbourne", Country = "Australia", Url = "http://en.wikipedia.org/wiki/Melbourne_Grand_Prix_Circuit" },
+                new Circuit { CircuitId = "americas", CircuitName = "Circuit of the Americas", Locality = "Austin", Country = "USA", Url = "http://en.wikipedia.org/wiki/Circuit_of_the_Americas" },
+                new Circuit { CircuitId = "bahrain", CircuitName = "Bahrain International Circuit", Locality = "Sakhir", Country = "Bahrain", Url = "http://en.wikipedia.org/wiki/Bahrain_International_Circuit" },
+                new Circuit { CircuitId = "baku", CircuitName = "Baku City Circuit", Locality = "Baku", Country = "Azerbaijan", Url = "http://en.wikipedia.org/wiki/Baku_City_Circuit" },
+                new Circuit { CircuitId = "catalunya", CircuitName = "Circuit de Barcelona-Catalunya", Locality = "Montmelo", Country = "Spain", Url = "http://en.wikipedia.org/wiki/Circuit_de_Barcelona-Catalunya" },
+                new Circuit { CircuitId = "hungaroring", CircuitName = "Hungaroring", Locality = "Budapest", Country = "Hungary", Url = "http://en.wikipedia.org/wiki/Hungaroring" },
+                new Circuit { CircuitId = "imola", CircuitName = "Autodromo Enzo e Dino Ferrari", Locality = "Imola", Country = "Italy", Url = "http://en.wikipedia.org/wiki/Autodromo_Enzo_e_Dino_Ferrari" },
+                new Circuit { CircuitId = "interlagos", CircuitName = "Autodromo Jose Carlos Pace", Locality = "Sao Paulo", Country = "Brazil", Url = "http://en.wikipedia.org/wiki/Aut%C3%B3dromo_Jos%C3%A9_Carlos_Pace" },
+                new Circuit { CircuitId = "jeddah", CircuitName = "Jeddah Corniche Circuit", Locality = "Jeddah", Country = "Saudi Arabia", Url = "http://en.wikipedia.org/wiki/Jeddah_Street_Circuit" },
+                new Circuit { CircuitId = "losail", CircuitName = "Losail International Circuit", Locality = "Al Daayen", Country = "Qatar", Url = "http://en.wikipedia.org/wiki/Losail_International_Circuit" },
+                new Circuit { CircuitId = "marina_bay", CircuitName = "Marina Bay Street Circuit", Locality = "Marina Bay", Country = "Singapore", Url = "http://en.wikipedia.org/wiki/Marina_Bay_Street_Circuit" },
+                new Circuit { CircuitId = "miami", CircuitName = "Miami International Autodrome", Locality = "Miami", Country = "USA", Url = "http://en.wikipedia.org/wiki/Miami_International_Autodrome" },
+                new Circuit { CircuitId = "monaco", CircuitName = "Circuit de Monaco", Locality = "Monte Carlo", Country = "Monaco", Url = "http://en.wikipedia.org/wiki/Circuit_de_Monaco" },
+                new Circuit { CircuitId = "monza", CircuitName = "Autodromo Nazionale di Monza", Locality = "Monza", Country = "Italy", Url = "http://en.wikipedia.org/wiki/Autodromo_Nazionale_Monza" },
+                new Circuit { CircuitId = "red_bull_ring", CircuitName = "Red Bull Ring", Locality = "Spielberg", Country = "Austria", Url = "http://en.wikipedia.org/wiki/Red_Bull_Ring" },
+                new Circuit { CircuitId = "ricard", CircuitName = "Circuit Paul Ricard", Locality = "Le Castellet", Country = "France", Url = "http://en.wikipedia.org/wiki/Paul_Ricard_Circuit" },
+                new Circuit { CircuitId = "rodriguez", CircuitName = "Autodromo Hermanos Rodriguez", Locality = "Mexico City", Country = "Mexico", Url = "http://en.wikipedia.org/wiki/Aut%C3%B3dromo_Hermanos_Rodr%C3%ADguez" },
+                new Circuit { CircuitId = "shanghai", CircuitName = "Shanghai International Circuit", Locality = "Shanghai", Country = "China", Url = "http://en.wikipedia.org/wiki/Shanghai_International_Circuit" },
+                new Circuit { CircuitId = "silverstone", CircuitName = "Silverstone Circuit", Locality = "Silverstone", Country = "UK", Url = "http://en.wikipedia.org/wiki/Silverstone_Circuit" },
+                new Circuit { CircuitId = "spa", CircuitName = "Circuit de Spa-Francorchamps", Locality = "Spa", Country = "Belgium", Url = "http://en.wikipedia.org/wiki/Circuit_de_Spa-Francorchamps" },
+                new Circuit { CircuitId = "suzuka", CircuitName = "Suzuka Circuit", Locality = "Suzuka", Country = "Japan", Url = "http://en.wikipedia.org/wiki/Suzuka_Circuit" },
+                new Circuit { CircuitId = "vegas", CircuitName = "Las Vegas Strip Street Circuit", Locality = "Las Vegas", Country = "USA", Url = "https://en.wikipedia.org/wiki/Las_Vegas_Grand_Prix#Circuit" },
+                new Circuit { CircuitId = "villeneuve", CircuitName = "Circuit Gilles Villeneuve", Locality = "Montreal", Country = "Canada", Url = "http://en.wikipedia.org/wiki/Circuit_Gilles_Villeneuve" },
+                new Circuit { CircuitId = "yas_marina", CircuitName = "Yas Marina Circuit", Locality = "Abu Dhabi", Country = "UAE", Url = "http://en.wikipedia.org/wiki/Yas_Marina_Circuit" },
+                new Circuit { CircuitId = "zandvoort", CircuitName = "Circuit Zandvoort", Locality = "Zandvoort", Country = "Netherlands", Url = "http://en.wikipedia.org/wiki/Circuit_Zandvoort" }
+            );
         }
     }
 }

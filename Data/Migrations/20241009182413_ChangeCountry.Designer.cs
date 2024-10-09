@@ -4,6 +4,7 @@ using DriveToGetDataWebsitePrototype.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DriveToGetDataWebsitePrototype.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241009182413_ChangeCountry")]
+    partial class ChangeCountry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,10 +95,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                     b.Property<string>("CircuitId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("CircuitImage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CircuitName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -121,7 +120,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "albert_park",
-                            CircuitImage = "",
                             CircuitName = "Albert Park Grand Prix Circuit",
                             Country = "Australia",
                             Locality = "Melbourne",
@@ -130,7 +128,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "americas",
-                            CircuitImage = "",
                             CircuitName = "Circuit of the Americas",
                             Country = "USA",
                             Locality = "Austin",
@@ -139,7 +136,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "bahrain",
-                            CircuitImage = "",
                             CircuitName = "Bahrain International Circuit",
                             Country = "Bahrain",
                             Locality = "Sakhir",
@@ -148,7 +144,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "baku",
-                            CircuitImage = "",
                             CircuitName = "Baku City Circuit",
                             Country = "Azerbaijan",
                             Locality = "Baku",
@@ -157,7 +152,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "catalunya",
-                            CircuitImage = "",
                             CircuitName = "Circuit de Barcelona-Catalunya",
                             Country = "Spain",
                             Locality = "Montmelo",
@@ -166,7 +160,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "hungaroring",
-                            CircuitImage = "",
                             CircuitName = "Hungaroring",
                             Country = "Hungary",
                             Locality = "Budapest",
@@ -175,7 +168,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "imola",
-                            CircuitImage = "",
                             CircuitName = "Autodromo Enzo e Dino Ferrari",
                             Country = "Italy",
                             Locality = "Imola",
@@ -184,7 +176,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "interlagos",
-                            CircuitImage = "",
                             CircuitName = "Autodromo Jose Carlos Pace",
                             Country = "Brazil",
                             Locality = "Sao Paulo",
@@ -193,7 +184,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "jeddah",
-                            CircuitImage = "",
                             CircuitName = "Jeddah Corniche Circuit",
                             Country = "Saudi Arabia",
                             Locality = "Jeddah",
@@ -202,7 +192,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "losail",
-                            CircuitImage = "",
                             CircuitName = "Losail International Circuit",
                             Country = "Qatar",
                             Locality = "Al Daayen",
@@ -211,7 +200,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "marina_bay",
-                            CircuitImage = "",
                             CircuitName = "Marina Bay Street Circuit",
                             Country = "Singapore",
                             Locality = "Marina Bay",
@@ -220,7 +208,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "miami",
-                            CircuitImage = "",
                             CircuitName = "Miami International Autodrome",
                             Country = "USA",
                             Locality = "Miami",
@@ -229,7 +216,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "monaco",
-                            CircuitImage = "",
                             CircuitName = "Circuit de Monaco",
                             Country = "Monaco",
                             Locality = "Monte Carlo",
@@ -238,7 +224,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "monza",
-                            CircuitImage = "",
                             CircuitName = "Autodromo Nazionale di Monza",
                             Country = "Italy",
                             Locality = "Monza",
@@ -247,7 +232,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "red_bull_ring",
-                            CircuitImage = "",
                             CircuitName = "Red Bull Ring",
                             Country = "Austria",
                             Locality = "Spielberg",
@@ -256,7 +240,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "ricard",
-                            CircuitImage = "",
                             CircuitName = "Circuit Paul Ricard",
                             Country = "France",
                             Locality = "Le Castellet",
@@ -265,7 +248,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "rodriguez",
-                            CircuitImage = "",
                             CircuitName = "Autodromo Hermanos Rodriguez",
                             Country = "Mexico",
                             Locality = "Mexico City",
@@ -274,7 +256,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "shanghai",
-                            CircuitImage = "",
                             CircuitName = "Shanghai International Circuit",
                             Country = "China",
                             Locality = "Shanghai",
@@ -283,7 +264,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "silverstone",
-                            CircuitImage = "",
                             CircuitName = "Silverstone Circuit",
                             Country = "UK",
                             Locality = "Silverstone",
@@ -292,7 +272,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "spa",
-                            CircuitImage = "",
                             CircuitName = "Circuit de Spa-Francorchamps",
                             Country = "Belgium",
                             Locality = "Spa",
@@ -301,7 +280,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "suzuka",
-                            CircuitImage = "",
                             CircuitName = "Suzuka Circuit",
                             Country = "Japan",
                             Locality = "Suzuka",
@@ -310,7 +288,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "vegas",
-                            CircuitImage = "",
                             CircuitName = "Las Vegas Strip Street Circuit",
                             Country = "USA",
                             Locality = "Las Vegas",
@@ -319,7 +296,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "villeneuve",
-                            CircuitImage = "",
                             CircuitName = "Circuit Gilles Villeneuve",
                             Country = "Canada",
                             Locality = "Montreal",
@@ -328,7 +304,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "yas_marina",
-                            CircuitImage = "",
                             CircuitName = "Yas Marina Circuit",
                             Country = "UAE",
                             Locality = "Abu Dhabi",
@@ -337,7 +312,6 @@ namespace DriveToGetDataWebsitePrototype.Migrations
                         new
                         {
                             CircuitId = "zandvoort",
-                            CircuitImage = "",
                             CircuitName = "Circuit Zandvoort",
                             Country = "Netherlands",
                             Locality = "Zandvoort",
