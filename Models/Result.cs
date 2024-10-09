@@ -15,6 +15,6 @@
     public class FastestLap
     {
         public TimeOnly Time { get; set; }
-        public Double AverageSpeed { get; set; }
+        public double AverageSpeed { get; set; }
     }
 }
