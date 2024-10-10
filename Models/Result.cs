@@ -9,17 +9,17 @@
         public int Grid { get; set; }
         public int Laps { get; set; }
         public string Status { get; set; }
-   /// <summary>
-   ///     public string Time { get; set; }
-   /// </summary>
-
         
-        public FastestLap FastestLap { get; set; }
+        // Using these leads to data conversion errors.
+
+        //public string Time { get; set; }
+        
+        //public FastestLap FastestLap { get; set; }
     }
 
     public class FastestLap
     {
-        public string? Time { get; set; }
-        public double AverageSpeed { get; set; }
+        public string Time { get; set; }
+        public double? AverageSpeed { get; set; }
     }
 }

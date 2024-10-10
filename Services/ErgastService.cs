@@ -23,27 +23,40 @@
             return response?.MRData?.DriverTable?.Drivers ?? new List<Driver>();
         }
 
-        public async Task<List<RaceResult>> GetRaceResultsAsync(string driver, int round)
+        public async Task<List<Race>> GetRaceResultsAsync(string driver, int round)
         {
-            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024/1/drivers/" + driver + "/" + round + "/results.json");
-            return response?.MRData?.RaceTable?.Races?.Select(r => new RaceResult
+            try
             {
-                RaceName = r.RaceName,
-                //CircuitName = r.CircuitName,
-                Date = r.Date,
-                Results = r.Results.Select(result => new Result
-                {
-                    Position = result.Position,
-                    Driver = new Driver
-                    {
-                        GivenName = result.Driver.GivenName,
-                        FamilyName = result.Driver.FamilyName
-                    },
-                    ConstructorName = result.ConstructorName,
-                    Points = result.Points,
-                    Laps = result.Laps
-                }).ToList()
-            }).ToList(); 
+                var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + $"/2024/drivers/{driver}/results.json");
+                return response?.MRData?.RaceTable?.Races ?? new List<Race>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return null;
+//            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024/1/drivers/" + driver + "/" + round + "/results.json");
+            //return response?.MRData?.RaceTable?.Races?.Select(r => new RaceResult
+            //{
+            //    RaceName = r.RaceName,
+            //    Circuit = new Circuit
+            //    {
+            //        Name = r.CircuitName,
+            //    Date = r.Date,
+            //    Results = r.Results.Select(result => new Result
+            //    {
+            //        Position = result.Position,
+            //        Driver = new Driver
+            //        {
+            //            GivenName = result.Driver.GivenName,
+            //            FamilyName = result.Driver.FamilyName
+            //        },
+            //        ConstructorName = result.ConstructorName,
+            //        Points = result.Points,
+            //        Laps = result.Laps
+            //    }).ToList()
+            //}).ToList(); 
         }
 
 

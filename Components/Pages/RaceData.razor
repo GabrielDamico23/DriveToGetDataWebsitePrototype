@@ -15,9 +15,9 @@
 
 @rendermode InteractiveServer
 
-<h3>Race Data</h3>
+<h3>Race Results</h3>
 
-<div>
+<div class="m-4">
     <label for="drivers">Drivers:</label>
     <select id="drivers" @bind="@selectedDriver">
         <option value="">Select a driver</option>
@@ -51,52 +51,50 @@
 
 @if (!string.IsNullOrEmpty(selectedDriver) && !string.IsNullOrEmpty(selectedRaceRound))
 {
-    <h4>Race Results: for </h4>
-    <p>Loading...</p>
-    
-    <button class="btn btn-success" @onclick="GetResults">Get Results</button>
+    <button class="btn btn-success m-3" @onclick="GetResults">Get Results</button>
 
     @if (raceResults != null)
     {
-        <table>
-            <thead>
-                <tr>
-@*                  <th>Race Name</th>
- *@                 <th>Circuit Name</th>
-                    <th>Date</th>
-                    <th>Results</th>
-@*                  <th>Finishing Position</th>
-                    <th>Points</th>
-                    <th>Laps completed</th>
-                    <th>Finishing Status</th>
-                    <th>Fastest Lap Time</th>
-                    <th>Fastest Lap Average Speed</th>
- *@                </tr>
-            </thead>
-            <tbody>
-                @foreach (var result in raceResults)
-                {
-                    <tr>
-                        <td>@result.RaceName</td>
-                        <td>@result.CircuitName</td>
-                        <td>@result.Date</td>
-                        <td>@result.Results.Count</td>
-@*                         <td>@result.Points</td>
-                        <td>@result.Laps</td>
-                        <td>@result.Status</td>
-                        <td>@result.FastestLap.Time</td>
-                        <td>@result.FastestLap.AverageSpeed</td>
- *@                    </tr>
-                }
-            </tbody>
-        </table>
+        @foreach (var race in raceResults)
+        {
+            <h4 class="mt-4">@race.RaceName</h4>
+            <table class="table table-bordered w-50">
+                <thead>
+                    <tr class="bg-info">
+                        <th>Driver</th>
+                        <th>Constructor</th>
+                        <th>Laps</th>
+                        @* <th>Fastest Time</th> *@
+                       @*  <th>Average Speed</th> *@
+                        <th>Position</th>
+                        <th>Points</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var result in race.Results)
+                    {
+                        <tr>
+                            <td>@result.Driver.GivenName</td>
+                            <td>@result.ConstructorName</td>
+                            <td>@result.Laps</td>
+                            @* <td>@result.FastestLap.Time</td> *@
+                            @* <td>@result.Time</td> *@
+                            <td>@result.Position</td>
+                            <td>@result.Points</td>
+                            <td>@result.Status</td>
+                        </tr>
+                     }
+                </tbody>
+            </table>
+        }
     }
 }
 
 @code 
 {
     private List<Driver> drivers;
-    private List<RaceResult> raceResults;
+    private List<Race> raceResults;
 
     private string selectedDriver;
     private string selectedRaceRound;
