@@ -14,20 +14,20 @@
 </div>
 
 <div class="ContactForm">
-    @if (showThankYouMessage)
+    @if (showThankYouMessage) // Show thank you message if form was submitted
     {
         <p>Thank you for your feedback!</p>
     }
-    else
+    else // Show the form 
     {
-        <form @onsubmit="SubmitForm">
+        <form @onsubmit="SubmitForm"> 
             <div class="form-group">
                 <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Please provide your email" @bind="@contactUs.Email" required>
+                <input type="email" class="form-control" id="email" placeholder="Please provide your email" @bind="@contactUs.Email" required> @*Bind the email input to the Email property of the contactUs object *@
             </div>
             <div class="form-group">
                 <label for="message">Message:</label>
-                <textarea class="form-control" id="message" placeholder="Type your message here..." @bind="@contactUs.Message" required></textarea>
+                <textarea class="form-control" id="message" placeholder="Type your message here..." @bind="@contactUs.Message" required></textarea> @*Bind the message input to the Message property of the contactUs object *@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -47,33 +47,33 @@
 </div>
 
 @code {
-    private ContactUs contactUs = new ContactUs();
-    private bool showThankYouMessage = false;
+    private ContactUs contactUs = new ContactUs(); // Create a new ContactUs object to store the form data
+    private bool showThankYouMessage = false; 
 
-    private async Task SubmitForm()
+    private async Task SubmitForm() // Method to submit the form
     {
         // Send email
         string emailBody = $"Email: {contactUs.Email}\nMessage: {contactUs.Message}";
         await SendEmail("dtgdcontactus@gmail.com", "New Contact Form Submission", emailBody);
 
-        showThankYouMessage = true;
+        showThankYouMessage = true; // Show thank you message
     }
 
-    private async Task SendEmail(string recipient, string subject, string body)
+    private async Task SendEmail(string recipient, strng subject, string body) // Method to send email
     {
-        using (var client = new SmtpClient("smtp.gmail.com", 587))
+        using (var client = new SmtpClient("smtp.gmail.com", 587)) // Use Gmail SMTP server
         {
-            client.Credentials = new System.Net.NetworkCredential("dtgdcontactus@gmail.com", "ecrgstpcbwiykaxn");
-            client.EnableSsl = true;
+            client.Credentials = new System.Net.NetworkCredential("dtgdcontactus@gmail.com", "ecrgstpcbwiykaxn"); // Use Gmail account to send email
+            client.EnableSsl = true; // Enable SSL
 
-            var message = new MailMessage
+            var message = new MailMessage // Create email message
                 {
-                    From = new MailAddress("dtgdcontactus@gmail.com"),
+                    From = new MailAddress("dtgdcontactus@gmail.com"), 
                     Subject = subject,
                     Body = body,
                     IsBodyHtml = false,
                 };
-            message.To.Add(recipient);
+            message.To.Add(recipient); // Add recipient
 
             // Send email asynchronously
             await client.SendMailAsync(message);

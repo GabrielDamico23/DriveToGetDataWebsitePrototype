@@ -4,20 +4,20 @@ using DriveToGetDataWebsitePrototype.Models;
 
 namespace DriveToGetDataWebsitePrototype.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options) 
     {
+        //here the F1Driver, Constructor and Circuit classes are added to the ApplicationDbContext class so that they can be used to create the database tables
         public DbSet<F1Driver> Drivers { get; set; }
         public DbSet<Constructor> Constructors { get; set; }
         public DbSet<Circuit> Circuits { get; set; }
-        public DbSet<ContactUs> ContactUsForms { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //add the F1Driver, Constructor and Circuit classes to the database as tables with the names Drivers, Constructors and Circuits respectively
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<F1Driver>().ToTable("Drivers");
             modelBuilder.Entity<Constructor>().ToTable("Constructors");
             modelBuilder.Entity<Circuit>().ToTable("Circuits");
-            modelBuilder.Entity<ContactUs>().ToTable("ContactUsForms");
 
             modelBuilder.Entity<F1Driver>().HasData(
                 new F1Driver { F1DriverId = "hamilton", GivenName = "Lewis", FamilyName = "Hamilton", PermanentNumber = 44, Nationality = "British", DateOfBirth = "1985-01-07", Url = "http://en.wikipedia.org/wiki/Lewis_Hamilton" },
