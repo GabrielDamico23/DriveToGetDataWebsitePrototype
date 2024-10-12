@@ -23,12 +23,32 @@
             return response?.MRData?.DriverTable?.Drivers ?? new List<Driver>();
         }
 
-        public async Task<List<Race>> GetRaceResultsAsync(string driver, int round)
+        public async Task<List<Race>> GetRaceResultsAsync(string driver)
         {
             try
             {
                 var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + $"/2024/drivers/{driver}/results.json");
-                return response?.MRData?.RaceTable?.Races ?? new List<Race>();
+                //return response?.MRData?.RaceTable?.Races ?? new List<Race>();
+
+                return response?.MRData?.RaceTable?.Races?.Select(r => new Race
+                {
+                    RaceName = r.RaceName,
+                    Results = r.Results.Select(result => new Result
+                    {
+                        Position = result.Position,
+                        Driver = new Driver
+                        {
+                            GivenName = result.Driver.GivenName,
+                            FamilyName = result.Driver.FamilyName
+                        },
+                        Constructor = result.Constructor,
+                        Points = result.Points,
+                        Laps = result.Laps,
+                        Status = result.Status,
+                        //Time = result.Time != null ? ParseTime(result.Time) : null,
+                        //Time = result.Time ?? "N/A"
+                    }).ToList()
+                }).ToList();
             }
             catch (Exception ex)
             {
@@ -36,27 +56,6 @@
             }
 
             return null;
-//            var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + "/2024/1/drivers/" + driver + "/" + round + "/results.json");
-            //return response?.MRData?.RaceTable?.Races?.Select(r => new RaceResult
-            //{
-            //    RaceName = r.RaceName,
-            //    Circuit = new Circuit
-            //    {
-            //        Name = r.CircuitName,
-            //    Date = r.Date,
-            //    Results = r.Results.Select(result => new Result
-            //    {
-            //        Position = result.Position,
-            //        Driver = new Driver
-            //        {
-            //            GivenName = result.Driver.GivenName,
-            //            FamilyName = result.Driver.FamilyName
-            //        },
-            //        ConstructorName = result.ConstructorName,
-            //        Points = result.Points,
-            //        Laps = result.Laps
-            //    }).ToList()
-            //}).ToList(); 
         }
 
 

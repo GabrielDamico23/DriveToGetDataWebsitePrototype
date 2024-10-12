@@ -18,7 +18,7 @@
         <option value="">Select a constructor</option>
         @foreach (var constructor in constructors)
         {
-            <option value="@constructor.ConstructorId">@($"{constructor.ConstructorName}")</option>
+            <option value="@constructor.ConstructorId">@($"{constructor.Name}")</option>
             // Display constructor name in a dropdown list
         }
     </select>
@@ -29,9 +29,9 @@
     {
         <div>
             @*//constructor details*@
-            <h3>You have selected: @($"{selectedConstructor.ConstructorName}")</h3>
-            <p>@($"{selectedConstructor.ConstructorName}") is a @selectedConstructor.Nationality team. They currently have @selectedConstructor.Driver1 and @selectedConstructor.Driver2 on their team for the 2024 season. </p>
-            <p>If you would like more information on @($"{selectedConstructor.ConstructorName}"), kindly click <a href="@selectedConstructor.Url" target="_blank">here</a></p>
+            <h3>You have selected: @($"{selectedConstructor.Name}")</h3>
+            <p>@($"{selectedConstructor.Name}") is a @selectedConstructor.Nationality team. They currently have @selectedConstructor.Driver1 and @selectedConstructor.Driver2 on their team for the 2024 season. </p>
+            <p>If you would like more information on @($"{selectedConstructor.Name}"), kindly click <a href="@selectedConstructor.Url" target="_blank">here</a></p>
         </div>
     }
     else  // Display message if no constructor is selected)

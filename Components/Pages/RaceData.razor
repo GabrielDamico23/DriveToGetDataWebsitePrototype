@@ -45,11 +45,7 @@
     </select>
 </div>  *@
 
-@{
-    selectedRaceRound = "2";
-}
-
-@if (!string.IsNullOrEmpty(selectedDriver) && !string.IsNullOrEmpty(selectedRaceRound))
+@if (!string.IsNullOrEmpty(selectedDriver))
 {
     <button class="btn btn-success m-3" @onclick="GetResults">Get Results</button>
 
@@ -63,11 +59,12 @@
                     <tr class="bg-info">
                         <th>Driver</th>
                         <th>Constructor</th>
-                        <th>Laps</th>
-                        @* <th>Fastest Time</th> *@
+                        <th class="text-center">Laps</th>
+                       @*  <th>Millis</th> *@
+                        @* <th>Time</th> *@
                        @*  <th>Average Speed</th> *@
-                        <th>Position</th>
-                        <th>Points</th>
+                        <th class="text-center">Position</th>
+                        <th class="text-center">Points</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -76,12 +73,13 @@
                     {
                         <tr>
                             <td>@result.Driver.GivenName</td>
-                            <td>@result.ConstructorName</td>
-                            <td>@result.Laps</td>
+                            <td>@result.Constructor.Name</td>
+                            <td class="text-center">@result.Laps</td>
                             @* <td>@result.FastestLap.Time</td> *@
+                            @* <td>@result.Millis</td> *@
                             @* <td>@result.Time</td> *@
-                            <td>@result.Position</td>
-                            <td>@result.Points</td>
+                            <td class="text-center">@result.Position</td>
+                            <td class="text-center">@result.Points</td>
                             <td>@result.Status</td>
                         </tr>
                      }
@@ -97,7 +95,6 @@
     private List<Race> raceResults;
 
     private string selectedDriver;
-    private string selectedRaceRound;
 
     //    private List<ErgastResult> results;
 
@@ -112,7 +109,7 @@
 
     private async Task GetResults()
     {
-        raceResults = await ergastService.GetRaceResultsAsync(selectedDriver, 1);
+        raceResults = await ergastService.GetRaceResultsAsync(selectedDriver);
         //httpClient.GetFromJsonAsync<List<Result>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
     }
 }

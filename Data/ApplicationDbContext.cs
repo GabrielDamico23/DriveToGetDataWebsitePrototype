@@ -48,16 +48,16 @@ namespace DriveToGetDataWebsitePrototype.Data
             );
 
             modelBuilder.Entity<Constructor>().HasData(
-                new Constructor { ConstructorId = "alpine", ConstructorName = "Alpine F1 Team", Nationality = "French", Url = "http://en.wikipedia.org/wiki/Alpine_F1_Team", Driver1 ="Pierre Gasly", Driver2 = "Esteban Ocon" },
-                new Constructor { ConstructorId = "aston_martin", ConstructorName = "Aston Martin", Nationality = "British", Url = "http://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One", Driver1 = "Fernando Alonso", Driver2 = "Lance Stoll" },
-                new Constructor { ConstructorId = "ferrari", ConstructorName = "Ferrari", Nationality = "Italian", Url = "http://en.wikipedia.org/wiki/Scuderia_Ferrari", Driver1 = "Charles Leclerc", Driver2 = "Carlos Sainz" },
-                new Constructor { ConstructorId = "haas", ConstructorName = "Haas F1 Team", Nationality = "American", Url = "http://en.wikipedia.org/wiki/Haas_F1_Team", Driver1 = "Nico Hülkenberg", Driver2 = "Kevin Magnussen" },
-                new Constructor { ConstructorId = "mclaren", ConstructorName = "McLaren", Nationality = "British", Url = "http://en.wikipedia.org/wiki/McLaren", Driver1 = "Lando Norris", Driver2 = "Oscar Piastri" },
-                new Constructor { ConstructorId = "mercedes", ConstructorName = "Mercedes", Nationality = "German", Url = "http://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One", Driver1 = "Lewis Hamilton", Driver2 = "George Russell" },
-                new Constructor { ConstructorId = "rb", ConstructorName = "RB F1 Team", Nationality = "Italian", Url = "http://en.wikipedia.org/wiki/RB_Formula_One_Team", Driver1 = "Yuki Tsunoda", Driver2 = "Liam Lawson" },
-                new Constructor { ConstructorId = "red_bull", ConstructorName = "Red Bull", Nationality = "Austrian", Url = "http://en.wikipedia.org/wiki/Red_Bull_Racing", Driver1 = "Max Verstappen", Driver2 = "Sergio Pérez" },
-                new Constructor { ConstructorId = "sauber", ConstructorName = "Sauber", Nationality = "Swiss", Url = "http://en.wikipedia.org/wiki/Sauber_Motorsport", Driver1 = "Valtteri Bottas", Driver2 = "Guanyu Zhou" },
-                new Constructor { ConstructorId = "williams", ConstructorName = "Williams", Nationality = "British", Url = "http://en.wikipedia.org/wiki/Williams_Grand_Prix_Engineering", Driver1 = "Alexander Albon", Driver2 = "Franco Colapinto" }
+                new Constructor { ConstructorId = "alpine", Name = "Alpine F1 Team", Nationality = "French", Url = "http://en.wikipedia.org/wiki/Alpine_F1_Team", Driver1 ="Pierre Gasly", Driver2 = "Esteban Ocon" },
+                new Constructor { ConstructorId = "aston_martin", Name = "Aston Martin", Nationality = "British", Url = "http://en.wikipedia.org/wiki/Aston_Martin_in_Formula_One", Driver1 = "Fernando Alonso", Driver2 = "Lance Stoll" },
+                new Constructor { ConstructorId = "ferrari", Name = "Ferrari", Nationality = "Italian", Url = "http://en.wikipedia.org/wiki/Scuderia_Ferrari", Driver1 = "Charles Leclerc", Driver2 = "Carlos Sainz" },
+                new Constructor { ConstructorId = "haas", Name = "Haas F1 Team", Nationality = "American", Url = "http://en.wikipedia.org/wiki/Haas_F1_Team", Driver1 = "Nico Hülkenberg", Driver2 = "Kevin Magnussen" },
+                new Constructor { ConstructorId = "mclaren", Name = "McLaren", Nationality = "British", Url = "http://en.wikipedia.org/wiki/McLaren", Driver1 = "Lando Norris", Driver2 = "Oscar Piastri" },
+                new Constructor { ConstructorId = "mercedes", Name = "Mercedes", Nationality = "German", Url = "http://en.wikipedia.org/wiki/Mercedes-Benz_in_Formula_One", Driver1 = "Lewis Hamilton", Driver2 = "George Russell" },
+                new Constructor { ConstructorId = "rb", Name = "RB F1 Team", Nationality = "Italian", Url = "http://en.wikipedia.org/wiki/RB_Formula_One_Team", Driver1 = "Yuki Tsunoda", Driver2 = "Liam Lawson" },
+                new Constructor { ConstructorId = "red_bull", Name = "Red Bull", Nationality = "Austrian", Url = "http://en.wikipedia.org/wiki/Red_Bull_Racing", Driver1 = "Max Verstappen", Driver2 = "Sergio Pérez" },
+                new Constructor { ConstructorId = "sauber", Name = "Sauber", Nationality = "Swiss", Url = "http://en.wikipedia.org/wiki/Sauber_Motorsport", Driver1 = "Valtteri Bottas", Driver2 = "Guanyu Zhou" },
+                new Constructor { ConstructorId = "williams", Name = "Williams", Nationality = "British", Url = "http://en.wikipedia.org/wiki/Williams_Grand_Prix_Engineering", Driver1 = "Alexander Albon", Driver2 = "Franco Colapinto" }
             );
 
             // Locality and Country are not used in the seeding of the Circuits table
