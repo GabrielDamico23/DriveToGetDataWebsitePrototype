@@ -1,4 +1,7 @@
-﻿namespace DriveToGetDataWebsitePrototype.Models
+﻿using System.Text.Json.Serialization;
+using DriveToGetDataWebsitePrototype.Services;
+
+namespace DriveToGetDataWebsitePrototype.Models
 {
     public class Result
     {
@@ -9,10 +12,20 @@
         public int Grid { get; set; }
         public int Laps { get; set; }
         public string Status { get; set; }
-        
-        // Using these leads to data conversion errors.
-        
+
+        [JsonConverter(typeof(TimeStringConverter))]
+        public double? Time { get; set; }
+
+        //
+        //Using these leads to data conversion errors.
+
+        //[JsonConverter(typeof(TimeConverter))]
+        //public double? Time { get; set; }
+
         //public string Time { get; set; }
+        //[JsonConverter(typeof(TimeSpanConverter))]
+        //public TimeSpan? Time { get; set; }
+
         //public TimeSpan? ParsedTime
         //{
         //    get
@@ -27,7 +40,7 @@
 
         //public string Millis { get; set; }
 
-        public FastestLap FastestLap { get; set; }
+        //public FastestLap FastestLap { get; set; }
     }
 
     public class FastestLap

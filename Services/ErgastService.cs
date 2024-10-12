@@ -45,7 +45,8 @@
                         Points = result.Points,
                         Laps = result.Laps,
                         Status = result.Status,
-                        //Time = result.Time != null ? ParseTime(result.Time) : null,
+                        Time = result.Time 
+                        //!= null ? ParseTime(result.Time) : null,
                         //Time = result.Time ?? "N/A"
                     }).ToList()
                 }).ToList();
