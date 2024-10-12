@@ -6,6 +6,37 @@
 @inject ApplicationDbContext DbContext
 @rendermode InteractiveServer
 
+<PageTitle>Contact Us</PageTitle>
+
+<head>
+    <style>
+        .PageFooter ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            background-color: #9C9C9C;
+            text-align: center;
+        }
+
+        .PageFooter li {
+            float: left;
+        }
+
+            .PageFooter li a {
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .PageFooter li a:hover {
+                    background-color: #ddd;
+                }
+    </style>
+</head>
+
 <div class="HeaderInfo">
     <h1>Contact Us</h1>
     <h5>Got any ideas on how we can make this website better or anything new you'd like to see?
@@ -16,7 +47,7 @@
 <div class="ContactForm">
     @if (showThankYouMessage) // Show thank you message if form was submitted
     {
-        <p>Thank you for your feedback!</p>
+        <h2>Thank you for your feedback!</h2>
     }
     else // Show the form 
     {
@@ -59,7 +90,7 @@
         showThankYouMessage = true; // Show thank you message
     }
 
-    private async Task SendEmail(string recipient, strng subject, string body) // Method to send email
+    private async Task SendEmail(string recipient, string subject, string body) // Method to send email
     {
         using (var client = new SmtpClient("smtp.gmail.com", 587)) // Use Gmail SMTP server
         {

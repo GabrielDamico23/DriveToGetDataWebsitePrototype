@@ -5,36 +5,108 @@
 @inject ApplicationDbContext DbContext
 @rendermode InteractiveServer
 
+<PageTitle>Formula 1 Drivers</PageTitle>
+
+<head>
+    <style>
+        .HeaderInfo h2 {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .HeaderInfo p {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .UserSelection {
+            float: left;
+            margin-top: 20px;
+            padding: 50px;
+        }
+
+        .UserSelectionInformation {
+            float: left;
+            margin-top: 20px;
+            padding: 50px;
+            border-left-style: solid;
+            border-left-width: 5px;
+        }
+
+        .UserSelection::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .Selection::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .PageFooter ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            background-color: #9C9C9C;
+            text-align: center;
+        }
+
+        .PageFooter li {
+            float: left;
+        }
+
+            .PageFooter li a {
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .PageFooter li a:hover {
+                    background-color: #ddd;
+                }
+    </style>
+</head>
+
+
+
 <div class="HeaderInfo">
     <h2>Formula 1 Drivers</h2>
     <p>This page will be displaying Formula 1 drivers details for drivers which raced between 2022 and 2024.</p>
     <br/>
     <p>Choose a driver to learn more about them:</p>
 </div>
-<div class="UserSelection">
-    <select id="DriverSelect" @onchange="OnDriverSelected">
-        <option value="">Select a driver</option>
-        @foreach (var driver in drivers)
-        {
-            <option value="@driver.F1DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option> // Display driver name in a dropdown list
-        }
-    </select>
-</div>
 
-<div class="UserSelectionInformation">
-    @if (selectedDriver != null) // Display driver details if a driver is selected
-    {
-        <div>
-            @*//driver details*@
-            <h3>You have selected: @($"{selectedDriver.GivenName} {selectedDriver.FamilyName}")</h3>
-            <p>@($"{selectedDriver.GivenName} {selectedDriver.FamilyName}") is a @selectedDriver.Nationality driver and was born in @selectedDriver.DateOfBirth. He races with the number @selectedDriver.PermanentNumber.</p>
-            <p>If you would like more information on @($"{selectedDriver.GivenName} {selectedDriver.FamilyName}"), kindly click <a href="@selectedDriver.Url" target="_blank">here</a></p>
-        </div> 
-    }
-    else  // Display message if no driver is selected)
-    {
-        <p>Select a driver to see details.</p>
-    }
+<div class="Selection">
+    <div class="UserSelection">
+        <select id="DriverSelect" @onchange="OnDriverSelected">
+            <option value="">Select a driver</option>
+            @foreach (var driver in drivers)
+            {
+                <option value="@driver.F1DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option> // Display driver name in a dropdown list
+            }
+        </select>
+    </div>
+
+    <div class="UserSelectionInformation">
+        @if (selectedDriver != null) // Display driver details if a driver is selected
+        {
+            <div>
+                @*//driver details*@
+                <h3>You have selected: @($"{selectedDriver.GivenName} {selectedDriver.FamilyName}")</h3>
+                <p>@($"{selectedDriver.GivenName} {selectedDriver.FamilyName}") is a @selectedDriver.Nationality driver and was born in @selectedDriver.DateOfBirth. He races with the number @selectedDriver.PermanentNumber.</p>
+                <p>If you would like more information on @($"{selectedDriver.GivenName} {selectedDriver.FamilyName}"), kindly click <a href="@selectedDriver.Url" target="_blank">here</a></p>
+            </div> 
+        }
+        else  // Display message if no driver is selected)
+        {
+            <p>Select a driver to see details.</p>
+        }
+    </div>
 </div>
 
 <div class="PageFooter">

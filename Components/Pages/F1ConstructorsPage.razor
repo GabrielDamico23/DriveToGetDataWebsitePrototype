@@ -5,6 +5,73 @@
 @inject ApplicationDbContext DbContext
 @rendermode InteractiveServer
 
+<PageTitle>Formula 1 Constructors</PageTitle>
+
+<head>
+    <style>
+        .HeaderInfo h2 {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .HeaderInfo p {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .UserSelection {
+            float: left;
+            margin-top: 20px;
+            padding: 50px;
+        }
+
+        .UserSelectionInformation {
+            float: left;
+            margin-top: 20px;
+            padding: 50px;
+            border-left-style: solid;
+            border-left-width: 5px;
+        }
+
+        .UserSelection::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .Selection::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .PageFooter ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            background-color: #9C9C9C;
+            text-align: center;
+        }
+
+        .PageFooter li {
+            float: left;
+        }
+
+            .PageFooter li a {
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                .PageFooter li a:hover {
+                    background-color: #ddd;
+                }
+    </style>
+</head>
+
 <div class="HeaderInfo">
     <h2>Formula 1 Constructors</h2>
     <p>This page will be displaying Formula 1 constructor details only for the year 2024.</p>
@@ -13,31 +80,33 @@
     <p>Choose a constructor to learn more about them:</p>
 </div>
 
-<div class="UserSelection">
-    <select id="ConstructorSelect" @onchange="OnConstructorSelected">
-        <option value="">Select a constructor</option>
-        @foreach (var constructor in constructors)
-        {
-            <option value="@constructor.ConstructorId">@($"{constructor.ConstructorName}")</option>
-            // Display constructor name in a dropdown list
-        }
-    </select>
-</div>
+<div class="Selection">
+    <div class="UserSelection">
+        <select id="ConstructorSelect" @onchange="OnConstructorSelected">
+            <option value="">Select a constructor</option>
+            @foreach (var constructor in constructors)
+            {
+                <option value="@constructor.ConstructorId">@($"{constructor.ConstructorName}")</option>
+                // Display constructor name in a dropdown list
+            }
+        </select>
+    </div>
 
-<div class="UserSelectionInformation">
-    @if (selectedConstructor != null) // Display constructor details if a constructor is selected
-    {
-        <div>
-            @*//constructor details*@
-            <h3>You have selected: @($"{selectedConstructor.ConstructorName}")</h3>
-            <p>@($"{selectedConstructor.ConstructorName}") is a @selectedConstructor.Nationality team. They currently have @selectedConstructor.Driver1 and @selectedConstructor.Driver2 on their team for the 2024 season. </p>
-            <p>If you would like more information on @($"{selectedConstructor.ConstructorName}"), kindly click <a href="@selectedConstructor.Url" target="_blank">here</a></p>
-        </div>
-    }
-    else  // Display message if no constructor is selected)
-    {
-        <p>Select a constructor to see details.</p>
-    }
+    <div class="UserSelectionInformation">
+        @if (selectedConstructor != null) // Display constructor details if a constructor is selected
+        {
+            <div>
+                @*//constructor details*@
+                <h3>You have selected: @($"{selectedConstructor.ConstructorName}")</h3>
+                <p>@($"{selectedConstructor.ConstructorName}") is a @selectedConstructor.Nationality team. They currently have @selectedConstructor.Driver1 and @selectedConstructor.Driver2 on their team for the 2024 season. </p>
+                <p>If you would like more information on @($"{selectedConstructor.ConstructorName}"), kindly click <a href="@selectedConstructor.Url" target="_blank">here</a></p>
+            </div>
+        }
+        else  // Display message if no constructor is selected)
+        {
+            <p>Select a constructor to see details.</p>
+        }
+    </div>
 </div>
 
 <div class="PageFooter">

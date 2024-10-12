@@ -5,6 +5,70 @@
 @inject ApplicationDbContext DbContext
 @rendermode InteractiveServer
 
+<PageTitle>Formula 1 Circuits</PageTitle>
+
+<head>
+    <style>
+        .HeaderInfo h2 {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .HeaderInfo p {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .UserSelection {
+            float: left;
+            margin-top: 20px;
+            padding: 50px;
+        }
+
+        .UserSelectionInformation {
+            float: left;
+            margin-top: 20px;
+            padding: 50px;
+            border-left-style: solid;
+            border-left-width: 5px;
+        }
+
+        .UserSelection::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .Selection::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .PageFooter ul {
+            list-style-type: none;
+            padding:0;
+            margin: 0;
+            overflow:hidden;
+            background-color: #9C9C9C;
+            text-align: center;
+        }
+        .PageFooter li {
+            float: left;
+        }
+        .PageFooter li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .PageFooter li a:hover {
+            background-color: #ddd;
+        }
+        
+    </style>
+</head>
+
 <div class="HeaderInfo">
     <h2>Formula 1 Circuits</h2>
     <p>This page will be displaying Formula 1 circuit details for the circuits which were used for a race between 2022 and 2024.</p>
@@ -12,32 +76,33 @@
     <br />
     <p>Choose a circuit below to learn more about them:</p>
 </div>
+<div class="Selection">
+    <div class="UserSelection">
+        <select id="CircuitSelect" @onchange="OnCircuitSelected">
+            <option value="">Select a circuit</option>
+            @foreach (var circuit in circuits)
+            {
+                <option value="@circuit.CircuitId">@($"{circuit.CircuitName}")</option>
+                // Display circuit name in a dropdown list
+            }
+        </select>
+    </div>
 
-<div class="UserSelection">
-    <select id="CircuitSelect" @onchange="OnCircuitSelected">
-        <option value="">Select a circuit</option>
-        @foreach (var circuit in circuits)
+    <div class="UserSelectionInformation">
+        @if (selectedCircuit != null) // Display circuit details if a circuit is selected
         {
-            <option value="@circuit.CircuitId">@($"{circuit.CircuitName}")</option>
-            // Display circuit name in a dropdown list
+            <div>
+                @*//circuit details*@
+                <h3>You have selected: @($"{selectedCircuit.CircuitName}") Circuit</h3>
+                <p>@($"{selectedCircuit.CircuitName}") is located in  @selectedCircuit.Locality, in @selectedCircuit.Country.</p>
+                <p>If you would like more information on @($"{selectedCircuit.CircuitName}"), kindly click <a href="@selectedCircuit.Url" target="_blank">here</a></p>
+            </div>
         }
-    </select>
-</div>
-
-<div class="UserSelectionInformation">
-    @if (selectedCircuit != null) // Display circuit details if a circuit is selected
-    {
-        <div>
-            @*//circuit details*@
-            <h3>You have selected: @($"{selectedCircuit.CircuitName}") Circuit</h3>
-            <p>@($"{selectedCircuit.CircuitName}") is located in  @selectedCircuit.Locality, in @selectedCircuit.Country.</p>
-            <p>If you would like more information on @($"{selectedCircuit.CircuitName}"), kindly click <a href="@selectedCircuit.Url" target="_blank">here</a></p>
-        </div>
-    }
-    else  // Display message if no circuit is selected)
-    {
-        <p>Select a circuit to see details.</p>
-    }
+        else  // Display message if no circuit is selected)
+        {
+            <p>Select a circuit to see details.</p>
+        }
+    </div>
 </div>
 
 <div class="PageFooter">
