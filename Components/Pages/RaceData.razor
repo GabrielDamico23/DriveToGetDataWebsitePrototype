@@ -58,43 +58,59 @@
         @foreach (var race in raceResults)
         {
             <h4 class="mt-4">@race.RaceName</h4>
+            <p>Race Round:  @race.Round</p>
             <table class="table table-bordered w-50">
                 <thead>
                     <tr class="bg-info">
                         <th>Driver</th>
-                        <th>Constructor</th>
-                        <th>Laps</th>
+                        <th>Starting Grid</th>
+                        <th>Finishing Position</th>
+                        <th>Points</th>
+                        <th>Laps Completed</th>
                         @* <th>Fastest Time</th> *@
                        @*  <th>Average Speed</th> *@
-                        <th>Position</th>
-                        <th>Points</th>
-                        <th>Status</th>
+                        <th>Finishing Status</th>
+@*                         <th>Fastest Lap of race</th>
+                        <th>Fastest Lap Overall Rank</th> *@
                     </tr>
                 </thead>
                 <tbody>
                     @foreach(var result in race.Results)
                     {
                         <tr>
-                            <td>@result.Driver.GivenName</td>
-                            <td>@result.ConstructorName</td>
-                            <td>@result.Laps</td>
+                            <td>@result.Driver.GivenName  @result.Driver.FamilyName</td>
+                            <td>@result.Grid</td>
                             @* <td>@result.FastestLap.Time</td> *@
                             @* <td>@result.Time</td> *@
                             <td>@result.Position</td>
                             <td>@result.Points</td>
+                            <td>@result.Laps</td>
                             <td>@result.Status</td>
+@*                             <td>@result.FLTime</td>
+                            <td>@result.FLRank</td> *@
                         </tr>
                      }
                 </tbody>
             </table>
         }
     }
+    @if (raceResultsPits != null)
+    {
+        @foreach (var racePits in raceResultsPits)
+        {
+            <p>Pitstop duration: @racePits.duration</p>
+        }
+    }
 }
+
+
+
 
 @code 
 {
     private List<Driver> drivers;
     private List<Race> raceResults;
+    private List<Race> raceResultsPits;
 
     private string selectedDriver;
     private string selectedRaceRound;
@@ -114,5 +130,7 @@
     {
         raceResults = await ergastService.GetRaceResultsAsync(selectedDriver, 1);
         //httpClient.GetFromJsonAsync<List<Result>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
+        raceResultsPits = await ergastService.GetPitStopsAsync(selectedDriver, 1);
     }
+
 }

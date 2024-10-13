@@ -59,6 +59,21 @@
             //}).ToList(); 
         }
 
+        public async Task<List<Race>> GetPitStopsAsync(string driver, int round)
+        {
+            try
+            {
+                var response = await _httpClient.GetFromJsonAsync<ErgastApiResponse>(Ergast_url + $"/2024/drivers/{driver}/pitstops.json");
+                return response?.MRData?.RaceTable?.Races ?? new List<Race>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+
+            return null;
+        }
+
 
         public class ErgastApiResponse
         {
