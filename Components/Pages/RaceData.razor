@@ -6,8 +6,7 @@
 @using DriveToGetDataWebsitePrototype.Services;
 @using DriveToGetDataWebsitePrototype.Models;
 
-@inject ErgastF1Service DriverService
-@inject ErgastF1Service RaceRoundService
+@inject ErgastF1Service ErgastService
 
 @rendermode InteractiveServer
 
@@ -21,82 +20,90 @@
         {
             @foreach (var driver in drivers)
             {
-                <option value="@driver.DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option>
+                <option value="@driver.driverId">@($"{driver.GivenName} {driver.FamilyName}")</option>
             }
         }
     </select>
 </div>
 
-<div>
+@* <div>
     <label for="raceRounds">Race Rounds:</label>
     <select id="raceRounds" @bind="@selectedRaceRound">
         <option value="">Select a race round</option>
-        @if (raceRounds != null)
+        @if (raceRound != null)
         {
-            @foreach (var raceRound in raceRounds)
+            @foreach (var RaceRound in raceRound)
             {
-                <option value="@raceRound.Round">@raceRound.RaceName</option>
+                <option value="@RaceRound.Round">@RaceRound.Round</option>
             }
         }
     </select>
 </div>
-
-@if (!string.IsNullOrEmpty(selectedDriver) && !string.IsNullOrEmpty(selectedRaceRound))
+ *@
+@if (!string.IsNullOrEmpty(selectedDriver) @* && !string.IsNullOrEmpty(selectedRaceRound) *@)
 {
-    <h4>Results:</h4>
-    <p>Loading...</p>
     <button @onclick="GetResults">Get Results</button>
+
     @if (results != null)
     {
-        <table>
-            <thead>
-                <tr>
-                    <th>Driver</th>
-                    <th>Constructor</th>
-                    <th>Starting Grid Position</th>
-                    <th>Finishing Position</th>
-                    <th>Points</th>
-                    <th>Laps completed</th>
-                    <th>Finishing Status</th>
-                    <th>Fastest Lap Time</th>
-                    <th>Fastest Lap Average Speed</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var result in results)
-                {
-                    <tr>
-                        <td>@result.GivenName @result.FamilyName</td>
-                        <td>@result.Name</td>
-                        <td>@result.Grid</td>
-                        <td>@result.Position</td>
-                        <td>@result.Points</td>
-                        <td>@result.Laps</td>
-                        <td>@result.Status</td>
-                        <td>@result.FastestLapTime</td>
-                        <td>@result.AverageSpeed</td>
+        @foreach (var race in results)
+        {
+            <h4 class="mt-4">@race.RaceName</h4>
+            <table class="table table-bordered w-50">
+                <thead>
+                    <tr class="bg-info">
+                        <th>Driver</th>
+                        <th>Starting Grid Position</th>
+                        <th>Finishing Status</th>
+                        <th>Finishing Position</th>
+                        <th class="text-center">Points</th>
+                        <th class="text-center">Laps Completed</th>
+                        <th>Fastest Lap Time</th>
+                        <th>Fastest Lap Overall Rank</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @* @foreach (var race in results)
+                    { *@
+                        <tr>
+                            <td>
+                                @if (race.Drivers != null && race.Drivers.Any())
+                                {
+                                    @string.Join(" ", race.Drivers.Select(d => $"{d.GivenName} {d.FamilyName}"))
+                                }
+                            </td>
+                            <td>@race.Grid</td>
+                            <td>@race.Status</td>
+                            <td class="text-center">@race.Position</td>
+                            <td class="text-center">@race.Points</td>
+                            <td class="text-center">@race.Laps</td>
+                            <td>@race.FastestLaps.FirstOrDefault()?.Time</td>
+                            <td>@race.FastestLaps.FirstOrDefault()?.Rank</td>
+                        </tr>
+                    
+                </tbody>
+            </table>
+        }
     }
 }
 
+
 @code {
-    private List<ErgastDriver> drivers;
-    private List<ErgastRaceRound> raceRounds;
-    private string selectedDriver;
-    private string selectedRaceRound;
-    private List<ErgastResult> results;
+    private List<Driver> drivers;
+    //    private List<Race> raceRound;
+    private List<Race> results;
+    private string selectedDriver { get; set; }
+    //    private string selectedRaceRound;
 
     protected override async Task OnInitializedAsync()
     {
-        drivers = await DriverService.GetErgastDriversAsync();
-        raceRounds = await RaceRoundService.GetErgastRaceRoundsAsync();
+        drivers = await ErgastService.GetErgastDriversAsync();
+        // results = await ErgastService.GetErgastRaceResultsAsync();
     }
 
     private async Task GetResults()
     {
-        results = await httpClient.GetFromJsonAsync<List<ErgastResult>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
+
+        results = await ErgastService.GetRaceResultsAsync(selectedDriver);
     }
 }

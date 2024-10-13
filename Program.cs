@@ -54,7 +54,6 @@ builder.Services.AddScoped(sp => new HttpClient
 
 
 builder.Services.AddScoped<DriveToGetDataWebsitePrototype.Services.ErgastF1Service>();
-builder.Services.AddScoped<DriveToGetDataWebsitePrototype.Services.OpenF1Service>();
 
 var app = builder.Build();
 

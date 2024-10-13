@@ -24,7 +24,7 @@ else
             <option value="">-- Select a Driver --</option>
             @foreach (var driver in f1drivers)
             {
-                <option value="@driver.DriverId">@driver.GivenName @driver.FamilyName</option>
+                <option value="@driver.F1DriverId">@driver.GivenName @driver.FamilyName</option>
             }
         </select>
     </div>
@@ -34,21 +34,21 @@ else
 
 @if (!string.IsNullOrEmpty(selectedDriver))
 {
-    var selectedDriverData = f1drivers.FirstOrDefault(driver => driver.DriverId == selectedDriver);
+    var selectedDriverData = f1drivers.FirstOrDefault(driver => driver.F1DriverId == selectedDriver);
     if (selectedDriverData != null)
     {
         <h4>Selected Driver: @selectedDriverData.GivenName</h4>
-        <p>Driver ID: @selectedDriverData.DriverId</p>
+        <p>Driver ID: @selectedDriverData.F1DriverId</p>
         <p>Nationality: @selectedDriverData.Nationality</p>
     }
 }
 @code
 {
-    private List<ErgastDriver> f1drivers;
+    private List<F1Driver> f1drivers;
     private string selectedDriver;
 
-    protected override async Task OnInitializedAsync()
-    {
-        f1drivers = await DriverService.GetErgastDriversAsync();
-    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     f1drivers = await DriverService.GetErgastDriversAsync();
+    // }
 }

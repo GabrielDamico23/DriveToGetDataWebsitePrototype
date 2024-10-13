@@ -2,19 +2,30 @@
 
 namespace DriveToGetDataWebsitePrototype.Models
 {
-    public class ErgastResult
-    {
-        public string DriverId { get; set; }
-        public string GivenName { get; set; }
-        public string FamilyName { get; set; }
-        public string Name { get; set; }
-        public int Position { get; set; }
-        public int Points { get; set; }
-        public int Grid { get; set; }
-        public int Laps { get; set; }
-        public string Status { get; set; }
-        public string FastestLapTime { get; set; }
-        public int AverageSpeed { get; set; }
+    //public class ErgastResult
+    //{
+    //    public string RaceName { get; set; }
+    //    public int Round { get; set; }
+    //    public List<ResultList> ListResults { get; set; }
 
-    }
+    //}
+
+    //public class ResultList
+    //{
+    //    public int position { get; set; }
+    //    public int points { get; set; }
+    //    public int Grid { get; set; }
+    //    public int Laps { get; set; }
+    //    public string status { get; set; }
+    //    public Driver driverResult { get; set; }
+    //    public string FullName => driverResult.GivenName + " " + driverResult.FamilyName;
+    //    public List<FastestsLaps> fastestLap { get; set; }
+    //    public IEnumerable<object> Results { get; internal set; }
+
+    //    public class FastestsLaps
+    //    {
+    //        public int rank { get; set; }
+    //        public string Time { get; set; }
+    //    }
+    //}
 }
