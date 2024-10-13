@@ -1,58 +1,39 @@
 ﻿@page "/racedata"
 
 @inject HttpClient httpClient
-@using Microsoft.AspNetCore.Components.QuickGrid
-@using Microsoft.AspNetCore.Components.Forms
 @using DriveToGetDataWebsitePrototype.Services;
 @using DriveToGetDataWebsitePrototype.Models;
+@using System.Diagnostics
 
-@inject ErgastF1Service DriverService
-@inject ErgastF1Service RaceRoundService
+@inject ErgastF1Service ergastService
 
 @rendermode InteractiveServer
 
-<h3>Race Data</h3>
+<h3>Race Results</h3>
 
-<div>
+<div class="m-4">
     <label for="drivers">Drivers:</label>
-    <select id="drivers" @bind="@selectedDriver">
+    <select id="drivers" @onchange="OnDriverChange">
         <option value="">Select a driver</option>
         @if (drivers != null)
         {
             @foreach (var driver in drivers)
             {
-                <option value="@driver.DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option>
+                <option value="@driver.driverId">@($"{driver.GivenName} {driver.FamilyName}")</option>
             }
         }
     </select>
 </div>
 
-<div>
-    <label for="raceRounds">Race Rounds:</label>
-    <select id="raceRounds" @bind="@selectedRaceRound">
-        <option value="">Select a race round</option>
-        @if (raceRounds != null)
-        {
-            @foreach (var raceRound in raceRounds)
-            {
-                <option value="@raceRound.Round">@raceRound.RaceName</option>
-            }
-        }
-    </select>
-</div>
-
-@if (!string.IsNullOrEmpty(selectedDriver) && !string.IsNullOrEmpty(selectedRaceRound))
+@if (raceResults.Any())
 {
-    <h4>Results:</h4>
-    <p>Loading...</p>
-    <button @onclick="GetResults">Get Results</button>
-    @if (results != null)
+    foreach (var race in raceResults)
     {
-        <table>
+        <h4 class="mt-4">@race.RaceName</h4>
+        <table class="table table-bordered w-50">
             <thead>
-                <tr>
+                <tr class="bg-info">
                     <th>Driver</th>
-                    <th>Constructor</th>
                     <th>Starting Grid Position</th>
                     <th>Finishing Position</th>
                     <th>Points</th>
@@ -63,40 +44,50 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var result in results)
+                @foreach (var result in race.ResultsLists.Results)
                 {
                     <tr>
-                        <td>@result.GivenName @result.FamilyName</td>
-                        <td>@result.Name</td>
+                        <td>@result.Driver.GivenName</td>
                         <td>@result.Grid</td>
-                        <td>@result.Position</td>
-                        <td>@result.Points</td>
-                        <td>@result.Laps</td>
+                        <td class="text-center">@result.Position</td>
+                        <td class="text-center">@result.Laps</td>
                         <td>@result.Status</td>
-                        <td>@result.FastestLapTime</td>
-                        <td>@result.AverageSpeed</td>
+                        <td>@result.FastestLap.Time</td>
+                        <td class="text-center">@result.Points</td>
                     </tr>
                 }
             </tbody>
         </table>
     }
 }
+else
+{
+    <p>No results found for the selected driver.</p>
+}
 
-@code {
-    private List<ErgastDriver> drivers;
-    private List<ErgastRaceRound> raceRounds;
+
+@code
+{
+    private List<Driver> drivers = new List<Driver>();
+    private List<Race1> raceResults = new List<Race1>();
     private string selectedDriver;
-    private string selectedRaceRound;
-    private List<ErgastResult> results;
 
     protected override async Task OnInitializedAsync()
     {
-        drivers = await DriverService.GetErgastDriversAsync();
-        raceRounds = await RaceRoundService.GetErgastRaceRoundsAsync();
+        drivers = await ergastService.GetErgastDriversAsync();
+    }
+
+    private async Task OnDriverChange(ChangeEventArgs e)
+    {
+        selectedDriver = e.Value?.ToString();
+        await GetResults();
     }
 
     private async Task GetResults()
     {
-        results = await httpClient.GetFromJsonAsync<List<ErgastResult>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
+        if (!string.IsNullOrEmpty(selectedDriver))
+        {
+            raceResults = await ergastService.GetRaceResultsAsync(selectedDriver);
+        }
     }
 }
