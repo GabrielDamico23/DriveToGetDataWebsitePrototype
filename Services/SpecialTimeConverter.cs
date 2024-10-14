@@ -7,7 +7,8 @@
 
     public class SpecialTimeConverter : JsonConverter<Time>
     {
-        public override Time Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Time Read(ref Utf8JsonReader reader, 
+            Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartObject)
             {
