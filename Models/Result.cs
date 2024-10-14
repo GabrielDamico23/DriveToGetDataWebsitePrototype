@@ -13,8 +13,8 @@ namespace DriveToGetDataWebsitePrototype.Models
         public int Laps { get; set; }
         public string Status { get; set; }
 
-        [JsonConverter(typeof(TimeStringConverter))]
-        public double? Time { get; set; }
+        [JsonConverter(typeof(SpecialTimeConverter))]
+        public Time Time { get; set; }
 
         //
         //Using these leads to data conversion errors.
@@ -43,6 +43,11 @@ namespace DriveToGetDataWebsitePrototype.Models
         //public FastestLap FastestLap { get; set; }
     }
 
+    public class Time
+    {
+        public string Millis { get; set; } = string.Empty;
+        public string TimeValue { get; set; } = string.Empty;
+    }
     public class FastestLap
     {
         public string Time { get; set; }

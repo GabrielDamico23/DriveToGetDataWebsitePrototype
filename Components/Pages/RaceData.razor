@@ -60,7 +60,7 @@
                         <th>Driver</th>
                         <th>Constructor</th>
                         <th class="text-center">Laps</th>
-                       @*  <th>Millis</th> *@
+                        <th>Millis</th>
                         <th>Time</th>
                        @*  <th>Average Speed</th> *@
                         <th class="text-center">Position</th>
@@ -75,12 +75,12 @@
                             <td>@result.Driver.GivenName</td>
                             <td>@result.Constructor.Name</td>
                             <td class="text-center">@result.Laps</td>
-                            @* <td>@result.FastestLap.Time</td> *@
-                            @* <td>@result.Millis</td> *@
-                            <td>@result.Time</td>
+                            <td>@(result.Time != null ? result.Time.Millis : "")</td>
+                            <td>@(result.Time != null ? result.Time.TimeValue : "")</td>
                             <td class="text-center">@result.Position</td>
                             <td class="text-center">@result.Points</td>
                             <td>@result.Status</td>
+                            @* <td>@result.FastestLap.Time</td> *@
                         </tr>
                      }
                 </tbody>
