@@ -7,15 +7,44 @@
 @using DriveToGetDataWebsitePrototype.Models;
 
 @inject ErgastF1Service ergastService
-
-@*
-    You do not need two instances of the same service    
-    //inject ErgastF1Service RaceRoundService
-*@
-
 @rendermode InteractiveServer
 
-<h3>Race Results</h3>
+<PageTitle>Race Results</PageTitle>
+
+<head>
+    <style>
+        
+        .PageFooter ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            background-color: #9C9C9C;
+            text-align: center;
+        }
+
+        .PageFooter li {
+            float: left;
+        }
+
+        .PageFooter li a {
+            display: block;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            padding-right: 50px;
+            padding-left: 50px;
+            text-decoration: none;
+        }
+
+        .PageFooter li a:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<h3>Do you want to get the race results of your favourite driver?</h3>
+<p>Choose a driver from the dropdown list and click the button to get the results.</p>
 
 <div class="m-4">
     <label for="drivers">Drivers:</label>
@@ -57,8 +86,7 @@
     {
         @foreach (var race in raceResults)
         {
-            <h4 class="mt-4">@race.RaceName</h4>
-            <p>Race Round:  @race.Round</p>
+            <h4 class="mt-4"> Race Round:  @race.Round. @race.RaceName</h4>
             <table class="table table-bordered w-50">
                 <thead>
                     <tr class="bg-info">
@@ -70,8 +98,8 @@
                         @* <th>Fastest Time</th> *@
                        @*  <th>Average Speed</th> *@
                         <th>Finishing Status</th>
-@*                         <th>Fastest Lap of race</th>
-                        <th>Fastest Lap Overall Rank</th> *@
+                         @* <th>Fastest Lap of race</th>
+                        <th>Fastest Lap Overall Rank</th> *@ 
                     </tr>
                 </thead>
                 <tbody>
@@ -86,8 +114,8 @@
                             <td>@result.Points</td>
                             <td>@result.Laps</td>
                             <td>@result.Status</td>
-@*                             <td>@result.FLTime</td>
-                            <td>@result.FLRank</td> *@
+                             @* <td>@result.FLTime</td>
+                            <td>@result.FLRank</td>  *@
                         </tr>
                      }
                 </tbody>
@@ -103,6 +131,17 @@
     }
 }
 
+<div class="PageFooter">
+    <ul>
+        <li><a href="/home">Home</a></li>
+        <li><a href="/racedata">Race Data</a></li>
+        <li><a href="/f1constructors">Formula 1</a></li>
+        <li><a href="/f1drivers">Drivers</a></li>
+        <li><a href="/f1circuits">Circuits</a></li>
+        <li><a href="/contactus">Contact Us</a></li>
+    </ul>
+    <p>This is a website prototype to be used in a Computing project by STU 84304 at Arden University and will be submitted in October 2024. This website is not to be published. </p>
+</div>
 
 
 
