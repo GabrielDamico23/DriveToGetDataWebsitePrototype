@@ -6,12 +6,191 @@
 @using DriveToGetDataWebsitePrototype.Services;
 @using DriveToGetDataWebsitePrototype.Models;
 
-@inject ErgastF1Service DriverService
-@inject ErgastF1Service RaceRoundService
+
+@inject ErgastF1Service ergastService
 
 @rendermode InteractiveServer
 
-<h3>Race Data</h3>
+<PageTitle>Race Results</PageTitle>
+
+<head>
+    <style>
+
+        .PageFooter ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            background-color: #9C9C9C;
+            text-align: center;
+        }
+
+        .PageFooter li {
+            float: left;
+        }
+
+            .PageFooter li a {
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                padding-right: 50px;
+                padding-left: 50px;
+                text-decoration: none;
+            }
+
+                .PageFooter li a:hover {
+                    background-color: #ddd;
+                }
+    </style>
+</head>
+
+<h3>Do you want to get the race results of your favourite driver?</h3>
+<p>Choose a driver from the dropdown list and click the button to get the results.</p>
+
+<div class="m-4">
+    <label for="drivers">Drivers:</label>
+    <select id="drivers" @bind="@selectedDriver">
+        <option value="">Select a driver</option>
+        @if (drivers != null)
+        {
+            @foreach (var driver in drivers)
+            {
+                <option value="@driver.DriverId">@($"{driver.GivenName} {driver.FamilyName}")</option>
+            }
+        }
+    </select>
+</div>
+
+@* <div>
+    <label for="raceRounds">Race Rounds:</label>
+    <select id="raceRounds" @bind="@selectedRaceRound">
+        <option value="">Select a race round</option>
+        @if (raceRounds != null)
+        {
+            @foreach (var raceRound in raceRounds)
+            {
+                <option value="@raceRound.Round">@raceRound.RaceName</option>
+            }
+        }
+    </select>
+</div>  *@
+
+@{
+    selectedRaceRound = "2";
+}
+
+@if (!string.IsNullOrEmpty(selectedDriver) && !string.IsNullOrEmpty(selectedRaceRound))
+{
+    <button class="btn btn-success m-3" @onclick="GetResults">Get Results</button>
+
+    @if (raceResults != null)
+    {
+        @foreach (var race in raceResults)
+        {
+            <h4 class="mt-4"> Race Round:  @race.Round. @race.RaceName</h4>
+            <table class="table table-bordered w-50">
+                <thead>
+                    <tr class="bg-info">
+                        <th>Driver</th>
+                        <th>Starting Grid</th>
+                        <th>Finishing Position</th>
+                        <th>Points</th>
+                        <th>Laps Completed</th>
+                        @* <th>Fastest Time</th> *@
+                        @*  <th>Average Speed</th> *@
+                        <th>Finishing Status</th>
+                        @* <th>Fastest Lap of race</th>
+            <th>Fastest Lap Overall Rank</th> *@
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var result in race.Results)
+                    {
+                        <tr>
+                            <td>@result.Driver.GivenName  @result.Driver.FamilyName</td>
+                            <td>@result.Grid</td>
+                            @* <td>@result.FastestLap.Time</td> *@
+                            @* <td>@result.Time</td> *@
+                            <td>@result.Position</td>
+                            <td>@result.Points</td>
+                            <td>@result.Laps</td>
+                            <td>@result.Status</td>
+                            @* <td>@result.FLTime</td>
+            <td>@result.FLRank</td>  *@
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    }
+    @if (raceResultsPits != null)
+    {
+        @foreach (var racePits in raceResultsPits)
+        {
+            <p>Pitstop duration: @racePits.duration</p>
+        }
+    }
+}
+
+<div class="PageFooter">
+    <ul>
+        <li><a href="">Home</a></li>
+        <li><a href="/racedata">Race Data</a></li>
+        <li><a href="/f1constructors">Constructors</a></li>
+        <li><a href="/f1drivers">Drivers</a></li>
+        <li><a href="/f1circuits">Circuits</a></li>
+        <li><a href="/contactus">Contact Us</a></li>
+    </ul>
+    <p>This is a website prototype to be used in a Computing project by STU 84304 at Arden University and will be submitted in October 2024. This website is not to be published. </p>
+</div>
+
+
+
+@code
+{
+    private List<Driver> drivers;
+    private List<Race> raceResults;
+    private List<Race> raceResultsPits;
+
+    private string selectedDriver;
+    private string selectedRaceRound;
+
+    //    private List<ErgastResult> results;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Why not use your db of drivers for the dropdown?
+        drivers = await ergastService.GetErgastDriversAsync();
+
+        // do not need the get below
+        //raceResults = await ergastService.GetRaceResultsAsync();
+    }
+
+    private async Task GetResults()
+    {
+        raceResults = await ergastService.GetRaceResultsAsync(selectedDriver, 1);
+        //httpClient.GetFromJsonAsync<List<Result>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
+        raceResultsPits = await ergastService.GetPitStopsAsync(selectedDriver, 1);
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <h3>Race Data</h3>
 
 <div>
     <label for="drivers">Drivers:</label>
@@ -99,4 +278,4 @@
     {
         results = await httpClient.GetFromJsonAsync<List<ErgastResult>>($"https://ergast.com/api/f1/2024/{selectedRaceRound}/drivers/{selectedDriver}/results.json");
     }
-}
+} *@
